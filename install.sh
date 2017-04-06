@@ -4,12 +4,6 @@ if [ $(id -u) != 0 ]; then
    sudo -v
 fi
 
-# Yaourt
-sudo echo "[archlinuxfr]" >> /etc/pacman.conf
-sudo echo "SigLevel = Never" >> /etc/pacman.conf
-sudo echo "Server = http://repo.archlinux.fr/$arch" >> /etc/pacman.conf
-sudo pacman -Sy yaourt --noconfirm --noconfirm
-
 # Tmux + Plugin manager
 sudo pacman -S tmux --noconfirm
 git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
@@ -28,6 +22,6 @@ sudo pacman -S fish --noconfirm
 # Gnu Stow
 sudo pacman -S stow --noconfirm
 
-stow tmux nvim fish
+stow bash tmux nvim fish
 fish -c fisher
 
