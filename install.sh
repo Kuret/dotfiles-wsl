@@ -1,8 +1,7 @@
 #!/bin/bash
 if [ $(id -u) != 0 ]; then
    echo "This script requires root permissions"
-   sudo "$0" 
-   exit
+   sudo -v
 fi
 
 # Yaourt
@@ -25,11 +24,10 @@ yaourt -S ruby-neovim --noconfirm
 
 # Fish + Fisherman + Theme
 sudo pacman -S fish --noconfirm
-curlCmd = curl -Lo $HOME/.config/fish/functions/fisher.fish --create-dirs git.io/fisher
-eval $curlCmd
-fish -c "fisher omf/theme-agnoster"
 
 # Gnu Stow
 sudo pacman -S stow --noconfirm
-cd $HOME && git clone https://github.com/Kuret/dotfiles.git
-cd dotfiles && stow tmux nvim
+
+stow tmux nvim fish
+fish -c fisher
+
