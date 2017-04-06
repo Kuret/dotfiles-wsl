@@ -25,3 +25,17 @@ sudo pacman -S stow --noconfirm
 stow bash tmux nvim fish
 fish -c fisher
 
+# Node/npm
+sudo pacman -S nodejs npm
+
+# Postgresql
+yaourt -S postgresql-9.5
+
+# Ruby/Rbenv/etc
+yaourt -S rbenv-git ruby-build rbenv-binstubs
+rbenv install 2.4.0
+rbenv global 2.4.0
+
+gem install bundler
+gem install foreman
+gem install rails -v 5.0.1
