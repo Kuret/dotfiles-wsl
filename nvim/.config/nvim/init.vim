@@ -1,3 +1,6 @@
+" TrueColor
+set termguicolors
+
 " Vim-plug
 source $HOME/.config/nvim/plugins.vim
 
