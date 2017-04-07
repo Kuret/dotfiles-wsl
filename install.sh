@@ -23,7 +23,7 @@ sudo pacman -S fish --noconfirm
 sudo pacman -S stow --noconfirm
 
 # Restore dotfiles
-stow bash tmux nvim fish
+stow tmux nvim fish
 fish -c fisher
 
 #
@@ -58,6 +58,6 @@ yaourt -S rbenv-binstubs --noconfirm
 rbenv install 2.4.0
 rbenv global 2.4.0
 
-gem install bundler
-gem install foreman
-gem install rails -v 5.0.1
+fish -c "gem install bundler"
+fish -c "gem install foreman"
+fish -c "gem install rails -v 5.0.1"
