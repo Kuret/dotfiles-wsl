@@ -22,14 +22,29 @@ sudo pacman -S fish --noconfirm
 # Gnu Stow
 sudo pacman -S stow --noconfirm
 
+# Restore dotfiles
 stow bash tmux nvim fish
 fish -c fisher
+
+#
+# Development stuff
+#
+
+# Redis
+sudo pacman -S redis
+
+# Qt/QtWebKit
+sudo pacman -S gt5-base qt5-webkit
 
 # Node/npm
 sudo pacman -S nodejs npm
 
 # Postgresql
-yaourt -S postgresql-9.5
+sudo pacman -S postgresql
+export $HOMEUSER=$USER # Preserve current username
+
+sudo -Eu postgres initdb --locale $LANG -E UTF8 -D '/var/lib/postgres/data'
+sudo -Eu postgres createuser $HOMEUSER --superuser
 
 # Ruby/Rbenv/etc
 yaourt -S rbenv-git ruby-build rbenv-binstubs
