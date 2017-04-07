@@ -1,5 +1,7 @@
 " TrueColor
 set termguicolors
+let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
 
 " Vim-plug
 source $HOME/.config/nvim/plugins.vim
@@ -86,7 +88,8 @@ let g:deoplete#enable_at_startup = 1
 syntax on
 
 " Color scheme
-set background=dark
-let g:airline_theme='jellybeans'
+let g:airline_theme='gruvbox'
 let g:airline_powerline_fonts = 1
-colorscheme hybrid
+let g:gruvbox_italic = 1
+colorscheme gruvbox
+set background=dark
