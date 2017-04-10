@@ -65,6 +65,7 @@ In my case i'm running Arch in Hyper-V, following steps are needed to SHH into i
 - Graphical applications support
 
   `sudo pacman -S xf86-video-fbdev xorg-xauth` (Optionally install a DE/window manager)
+  
   Edit `/etc/ssh/sshd_config`, uncomment `ForwardX11` and change value to `yes`
   
 # Git config
