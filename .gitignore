@@ -1,4 +1,4 @@
-fish/.config/fish/fishd.arch-linux
+fish/.config/fish/fishd.*
 fish/.config/fish/completions
 fish/.config/fish/functions/fish_mode_prompt.fish
 fish/.config/fish/functions/fish_prompt.fish
