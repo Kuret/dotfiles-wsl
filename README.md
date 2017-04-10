@@ -66,7 +66,25 @@ In my case i'm running Arch in Hyper-V, following steps are needed to SHH into i
 
   `sudo pacman -S xf86-video-fbdev xorg-xauth` (Optionally install a DE/window manager)
   
-  Edit `/etc/ssh/sshd_config`, uncomment `ForwardX11` and change value to `yes`
+- Edit/uncomment sections in `/etc/ssh/sshd_config`
+  
+  ```
+  ForwardX11 yes
+  PubkeyAuthentication yes
+  RSAAuthentication yes
+  ```
+  
+- Cygwin
+
+   Install Cygwin + xinit (X server) + openssh
+
+  In cygwin: `ssh -t rsa`
+  
+  Copy the `id_rsa.pub` content to the Arch's .ssh/authorized_keys
+  
+  In cygwin, add to `.bashrc` export DISPLAY=:0.0
+  
+  Add cygwin's XWin Server to Windows's startup applications
   
 # Git config
 
