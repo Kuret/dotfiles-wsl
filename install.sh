@@ -25,8 +25,8 @@ sudo pacman -S stow --noconfirm
 stow tmux nvim fish
 fish -c fisher
 
-nvim +PlugInstall +qall
-nvim +UpdateRemotePlugins +qall
+nvim --headless +PlugInstall +qall
+nvim --headless +UpdateRemotePlugins +qall
 
 #
 # Development stuff
