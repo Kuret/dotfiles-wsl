@@ -6,7 +6,6 @@ fi
 
 # Tmux + Plugin manager
 sudo pacman -S tmux --noconfirm
-git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 
 # xclip for nvim clipboard integration
 sudo pacman -S xclip --noconfirm
