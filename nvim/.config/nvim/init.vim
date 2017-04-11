@@ -1,14 +1,58 @@
-" TrueColor
-set termguicolors
-let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
-let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+" base
+set nocompatible                      " vim, not vi
+syntax on                             " syntax highlighting
+filetype plugin indent on             " try to recognise filetype and load plugins and indent files
 
-" Vim-plug
-source $HOME/.config/nvim/plugins.vim
+" interface
+set background=dark                   " tell vim what the background color looks like
+set colorcolumn=80                    " show a column at 80 chars
+set cursorline                        " highlight current line
+set laststatus=2                      " enable airline on open
+set noshowmode                        " don't show mode as airline already does
+set number                            " show line numbers
+set relativenumber                    " show relative line numbers
+set ruler                             " show current position at bottom
+set scrolloff=5                       " keep at least 5 lines above/below
+set shortmess+=aAIsT                  " disable welcome screen and other messages
+set showcmd                           " show any commands
+set sidescroll=1                      " smoother horizontal scrolling
+set sidescrolloff=5                   " keep at least 5 lines left/right
+set splitbelow                        " create new splits below
+set splitright                        " create new splits to the right
+set termguicolors                     " enable true colors
+set wildmenu                          " enable wildmenu
+set wildmode=longest:full,full        " configure wildmenu
+set lazyredraw                        " don't draw everything
 
-" Functions
+" whitespace
+set expandtab                         " use tabs instead of spaces
+set nojoinspaces                      " use one space, not two, after punctuation
+set shiftround                        " shift to next tabstop
+set shiftwidth=2                      " amount of space used for indentation
+set softtabstop=2                     " appearance of tabs
+set tabstop=2                         " use two spaces for tabs
 
-" allows cursor change in tmux mode
+" background processes
+set autoread                          " update file when changed outside of vim
+set autoindent                        " copy indentation from the previous line for new line
+set clipboard=unnamed                 " use native clipboard
+set nobackup                          " don't save backups
+set noerrorbells                      " no error bells please
+set noswapfile                        " no swapfiles
+set nowritebackup                     " don't save a backup while editing
+set ttyfast                           " indicates a fast terminal connection
+set undodir=~/.config/nvim/undodir    " set undofile location
+set undofile                          " maintain undo history between sessions
+set undolevels=1000                   " store 1000 undos
+
+" character encoding
+if !&readonly && &modifiable
+  set fileencoding=utf-8              " the encoding written to file
+endif
+  set encoding=utf-8                  " the encoding displayed
+
+
+" Allows cursor change in tmux mode
 if exists('$TMUX')
     let &t_SI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=1\x7\<Esc>\\"
     let &t_EI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=0\x7\<Esc>\\"
@@ -16,7 +60,6 @@ else
     let &t_SI = "\<Esc>]50;CursorShape=1\x7"
     let &t_EI = "\<Esc>]50;CursorShape=0\x7"
 endif
-
 
 " The Silver Searcher
 if executable('ag')
@@ -30,66 +73,8 @@ if executable('ag')
   let g:ctrlp_use_caching = 0
 endif
 
-" bind K to grep word under cursor
-nnoremap <C-S-F> :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
+source $HOME/.config/nvim/plugins.vim " Load plugins
+source $HOME/.config/nvim/bindings.vim " Load bindings
+source $HOME/.config/nvim/theme.vim " Load theme
+source $HOME/.config/nvim/plugins-config.vim " Load plugin settings
 
-" KEYBINDS
-
-" Splits
-
-" Splits
-map \	  <C-W>v<C-W><Right>
-map -     <C-W>s<C-W><Down>
-" Split direction
-set splitbelow
-set splitright
-" Navigation
-nnoremap <C-J> <C-W><C-J>
-nnoremap <C-K> <C-W><C-K>
-nnoremap <C-L> <C-W><C-L>
-nnoremap <C-H> <C-W><C-H>
-" Resize
-nnoremap <C-UP>    <C-W>+<CR>
-nnoremap <C-DOWN>  <C-W>-<CR>
-nnoremap <C-LEFT>    <C-W><<CR>
-nnoremap <C-RIGHT>  <C-W>><CR>
-
-" Tabs
-nnoremap <S-L> :tabn<CR>
-nnoremap <S-H> :tabp<CR>
-nnoremap <S-J> :tabc<CR>
-nnoremap <S-K> :tabnew<CR>
-nnoremap <S-O> :tabo<CR>
-
-" Window swap
-let g:windowswap_map_keys = 0 "prevent default bindings
-nnoremap <silent> <C-W> :call WindowSwap#EasyWindowSwap()<CR>
-
-" File tree
-nnoremap <silent> <C-D> :NERDTreeToggle<CR>
-
-" Test suite
-let test#strategy = "neovim"
-" Repeat last test
-nnoremap <silent> <C-E> :TestLast<CR> 
-" Test under cursor
-nnoremap <silent> <C-R> :TestNearest<CR> 
-" Test current file
-nnoremap <silent> <C-T> :TestFile<CR> 
-" Run all tests
-nnoremap <silent> <C-Y> :TestSuite<CR> 
-" Navigate to last test
-nnoremap <silent> <C-U> :TestVisit<CR> 
-
-" Autocomplete
-let g:deoplete#enable_at_startup = 1
-
-" Syntax
-syntax on
-
-" Color scheme
-let g:airline_theme='gruvbox'
-let g:airline_powerline_fonts = 1
-let g:gruvbox_italic = 1
-colorscheme gruvbox
-set background=dark
