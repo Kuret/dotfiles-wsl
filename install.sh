@@ -4,26 +4,23 @@ if [ $(id -u) != 0 ]; then
    sudo -v
 fi
 
-# Tmux + Plugin manager
+# Tmux
 sudo pacman -S tmux --noconfirm
-
-# xclip for nvim clipboard integration
-sudo pacman -S xclip --noconfirm
 
 # Neovim + plugins
 sudo pacman -S neovim --noconfirm
 sudo pacman -S python2-neovim python-neovim --noconfirm
 yaourt -S ruby-neovim --noconfirm
 
-# Fish + Fisherman + Theme
-sudo pacman -S fish --noconfirm
+# Zsh + Antigen
+sudo pacman -S zsh --noconfirm
+yaourt -S antigen-git --noconfirm
 
 # Gnu Stow
 sudo pacman -S stow --noconfirm
 
 # Restore dotfiles
-stow tmux nvim fish
-fish -c fisher
+stow tmux nvim bash zsh
 
 nvim --headless +PlugInstall +qall
 nvim --headless +UpdateRemotePlugins +qall
@@ -60,6 +57,11 @@ yaourt -S rbenv-binstubs --noconfirm
 rbenv install 2.4.0
 rbenv global 2.4.0
 
-fish -c "gem install bundler"
-fish -c "gem install foreman"
-fish -c "gem install rails -v 5.0.1"
+zsh -c "gem install bundler"
+zsh -c "gem install foreman"
+zsh -c "gem install rails -v 5.0.1"
+
+# Elixir/Phoenix
+sudo pacman -S elixir --noconfirm
+zsh -c "mix local.hex"
+zsh -c "mix archive.install https://github.com/phoenixframework/archives/raw/master/phx_new.ez"
