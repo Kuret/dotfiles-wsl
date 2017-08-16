@@ -14,14 +14,9 @@ This repo contains my dotfiles and OS/Distro specific scripts, which will instal
 - Ruby gems: Bundler + Foreman + Rails 5.0.1
 - Elixir + Phoenix
 
-# Arch setup
-
-Requirements before running the script:
-- Locale set (LANG, LANGUAGE, LC_ALL, etc)
-- Git
-- Yaourt
-
 # Running the script
+
+**Make sure you have everything setup correctly, as described below**
 
 The script requires root and will ask for the root password by itself, **don't start the script as root, use your normal user**
 
@@ -30,19 +25,31 @@ cd ~
 git clone git@github.com:Kuret/dotfiles.git
 cd dotfiles
 chmod +x install.sh
-./install.sh
+./install-{distro}.sh
 ```
 
-# Windows Subsystem For Linux (Using OpenSUSE)
+# Manually
 
-Activate the WSL in windows:
-- Make sure you are running Windows 10 Anniversary Update or later (build 1607+)
-- Open powershell as administrator and run command
+- Install GNU Stow using you package manager
+- Install whatever packages you need
+- Use `stow` to symlink the dotfiles
 
-   `Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Windows-Subsystem-Linux`
-   
-- Go to the Windows store and install the package `OpenSUSE Leap`
-- Run the user setup and set your username and passwords
+# OpenSUSE setup
+
+Requirements before running the script:
+- Git
+
+# Arch setup
+
+Requirements before running the script:
+- Locale set (LANG, LANGUAGE, LC_ALL, etc)
+- Git
+- Yaourt
+
+# Permissions
+
+**This isn't needed if you already have a user you can `sudo` with**
+
 - Add your user to the 'wheel' group
 
    `sudo usermod -G wheel USERNAME`
@@ -54,6 +61,17 @@ Activate the WSL in windows:
    Or with NOPASSWD if you don't want to require a password
    
    `%wheel  ALL=(ALL) NOPASSWD: ALL`
+
+# Windows Subsystem For Linux (Using OpenSUSE)
+
+Activate the WSL in windows:
+- Make sure you are running a Windows 10 build with Windows Store support for WSL (build 16215+)
+- Open powershell as administrator and run command
+
+   `Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Windows-Subsystem-Linux`
+   
+- Go to the Windows store and install the package `OpenSUSE Leap` (Or Ubuntu if you don't mind not having an install script)
+- Run the user setup and set your username and passwords
 
 # Hyper-V
 
