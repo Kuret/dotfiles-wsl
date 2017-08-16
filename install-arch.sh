@@ -20,7 +20,7 @@ yaourt -S antigen-git --noconfirm
 sudo pacman -S stow --noconfirm
 
 # Restore dotfiles
-stow tmux nvim bash zsh
+stow tmux nvim zsh
 
 nvim --headless +PlugInstall +qall
 nvim --headless +UpdateRemotePlugins +qall
