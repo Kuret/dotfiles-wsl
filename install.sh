@@ -35,7 +35,7 @@ sudo systemctl start redis
 sudo systemctl enable redis
 
 # Qt/QtWebKit
-sudo pacman -S gt5-base qt5-webkit --noconfirm
+sudo pacman -S qt5-base qt5-webkit --noconfirm
 
 # Node/npm
 sudo pacman -S nodejs npm --noconfirm
