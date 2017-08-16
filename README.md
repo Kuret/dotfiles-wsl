@@ -33,6 +33,16 @@ chmod +x install.sh
 ./install.sh
 ```
 
+# Windows Subsystem For Linux
+
+Activate the WSL in windows:
+- Make sure you are running Windows 10 Anniversary Update or later (build 1607+)
+- Open powershell as administrator and run command
+
+   `Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Windows-Subsystem-Linux`
+   
+- 
+
 # Hyper-V
 
 When running Arch in Hyper-V, following steps are needed to SHH into it properly:
