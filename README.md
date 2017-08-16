@@ -4,7 +4,7 @@ This repo contains my dotfiles and an install script, which will install:
 - Tmux
 - Xclip
 - Neovim + Plugins
-- Fish + Fisher + Agnoster
+- Zsh + Antigen
 - Stow (to symlink dotfiles)
 - Redis
 - Node.js + NPM
@@ -12,6 +12,7 @@ This repo contains my dotfiles and an install script, which will install:
 - Rbenv + Ruby-build
 - Ruby 2.4.0
 - Ruby gems: Bundler + Foreman + Rails 5.0.1
+- Elixir + Phoenix
 
 # Arch setup
 
