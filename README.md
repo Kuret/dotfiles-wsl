@@ -1,6 +1,6 @@
 # Dotfiles
 
-This repo contains my dotfiles and an install script, which will install:
+This repo contains my dotfiles and OS/Distro specific scripts, which will install:
 - Tmux
 - Xclip
 - Neovim + Plugins
@@ -33,7 +33,7 @@ chmod +x install.sh
 ./install.sh
 ```
 
-# Windows Subsystem For Linux
+# Windows Subsystem For Linux (Using OpenSUSE)
 
 Activate the WSL in windows:
 - Make sure you are running Windows 10 Anniversary Update or later (build 1607+)
@@ -41,7 +41,19 @@ Activate the WSL in windows:
 
    `Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Windows-Subsystem-Linux`
    
-- 
+- Go to the Windows store and install the package `OpenSUSE Leap`
+- Run the user setup and set your username and passwords
+- Add your user to the 'wheel' group
+
+   `sudo usermod -G wheel USERNAME`
+   
+- Uncomment the relevant line in your sudoers file
+
+   `%wheel  ALL=(ALL) ALL`
+   
+   Or with NOPASSWD if you don't want to require a password
+   
+   `%wheel  ALL=(ALL) NOPASSWD: ALL`
 
 # Hyper-V
 
