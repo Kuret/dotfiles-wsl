@@ -2,7 +2,6 @@
 
 This repo contains my dotfiles and OS/Distro specific scripts, which will install:
 - Tmux
-- Xclip
 - Neovim + Plugins
 - Zsh + Antigen
 - Stow (to symlink dotfiles)
@@ -13,6 +12,10 @@ This repo contains my dotfiles and OS/Distro specific scripts, which will instal
 - Ruby 2.4.0
 - Ruby gems: Bundler + Foreman + Rails 5.0.1
 - Elixir + Phoenix
+
+Supported setups when using the install script (for now):
+- Windows Subsystem for Linux with the Store version of OpenSUSE LEAP
+- Hyper-V with Arch Linux
 
 # Running the script
 
