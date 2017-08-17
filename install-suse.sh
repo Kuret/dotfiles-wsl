@@ -5,8 +5,8 @@ if [ $(id -u) != 0 ]; then
 fi
 
 # Add repos
-sudo zypper addrepo http://download.opensuse.org/repositories/shells:zsh-users:antigen/openSUSE_Leap_42.2/shells:zsh-users:antigen.repo
-sudo zypper refresh
+sudo zypper -n addrepo http://download.opensuse.org/repositories/shells:zsh-users:antigen/openSUSE_Leap_42.2/shells:zsh-users:antigen.repo
+sudo zypper -n refresh
 
 # Tmux
 sudo zypper -n in tmux
@@ -38,14 +38,8 @@ sudo systemctl enable redis
 # Node/npm
 sudo zypper -n in nodejs npm
 
-# Postgresql
+# Postgresql client
 sudo zypper -n in postgresql
-sudo systemctl start postgresql
-sudo systemctl enable postgresql
-
-export $HOMEUSER=$USER # Preserve current username
-sudo -Eu postgres initdb --locale $LANG -E UTF8 -D '/var/lib/postgres/data'
-sudo -Eu postgres createuser $HOMEUSER --superuser
 
 # Ruby/Rbenv/etc
 sudo zypper -n in rbenv ruby-build
