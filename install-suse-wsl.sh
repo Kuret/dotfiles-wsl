@@ -4,6 +4,13 @@ if [ $(id -u) != 0 ]; then
    sudo -v
 fi
 
+# Windows <-> Linux clipboard support
+mkdir ~/lemonade_tmp
+wget -P ~/lemonade_tmp/ -q https://github.com/pocke/lemonade/releases/download/v1.1.1/lemonade_linux_amd64.tar.gz
+tar xzf ~/lemonade_tmp/lemonade_linux_amd64.tar.gz -C ~/lemonade_tmp/
+sudo cp ~/lemonade_tmp/lemonade /usr/local/bin
+rm -rf ~/lemonade_tmp/
+
 # Add repos
 sudo zypper -n addrepo http://download.opensuse.org/repositories/shells:zsh-users:antigen/openSUSE_Leap_42.2/shells:zsh-users:antigen.repo
 sudo zypper -n refresh
