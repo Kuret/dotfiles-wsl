@@ -76,6 +76,20 @@ Activate the WSL in windows:
 - Go to the Windows store and install the package `OpenSUSE Leap` (Or Ubuntu if you don't mind not having an install script)
 - Run the user setup and set your username and passwords
 
+For cross platform copy-paste support I use Lemonade: https://github.com/pocke/lemonade
+- The install script installs the Linux client
+- Download the Windows application from https://github.com/pocke/lemonade/releases
+- Unzip the Windows version and put the `lemonade.exe` in a convenient directory
+- To run the server open a command prompt and run `lemonade.exe server`
+- To send something to the clipboard from Linux run `lemonade copy "YourClipboardText"` or `OutputToPipe | lemonade copy`
+
+I recommend running PSQL Portable from Windows: https://github.com/garethflowers/postgresql-portable
+For easy cross platform connection in a dev setup:
+- Make a superuser with the same username as your linux user
+- Make a default database with the same name as your linux user
+- In your .bashrc/.zshrc add the following: `export PGHOST=localhost`
+- You should be able to connect using just the command `psql` now
+
 # Hyper-V
 
 When running Arch in Hyper-V, following steps are needed to SHH into it properly:
