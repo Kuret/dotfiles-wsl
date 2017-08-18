@@ -3,7 +3,7 @@
 This repo contains my dotfiles and OS/Distro specific scripts, which will install:
 - Tmux
 - Neovim + Plugins
-- Zsh + Antigen
+- Zsh + Zgen
 - Stow (to symlink dotfiles)
 - Redis
 - Node.js + NPM
