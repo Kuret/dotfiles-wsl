@@ -1,20 +1,20 @@
 # Dotfiles
 
 This repo contains my dotfiles and OS/Distro specific scripts, which will install:
+- Git
 - Tmux
 - Neovim + Plugins
 - Zsh + Zgen
 - Stow (to symlink dotfiles)
 - Redis
-- Node.js + NPM
+- Nodejs
 - PostgreSQL
-- Rbenv + Ruby-build
-- Ruby 2.4.0
+- Ruby
 - Ruby gems: Bundler + Foreman + Rails 5.0.1
 - Elixir + Phoenix
 
 Supported setups when using the install script (for now):
-- Windows Subsystem for Linux with the Store version of OpenSUSE LEAP
+- Windows Subsystem for Linux (Tested on the Windows Store version of OpenSUSE LEAP 42.2)
 - Hyper-V with Arch Linux
 
 # Running the script
@@ -37,7 +37,7 @@ chmod +x install.sh
 - Install whatever packages you need
 - Use `stow` to symlink the dotfiles
 
-# OpenSUSE setup
+# WSL setup
 
 Requirements before running the script:
 - Git
