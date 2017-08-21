@@ -4,6 +4,10 @@ if [ $(id -u) != 0 ]; then
    sudo -v
 fi
 
+# Fix locale errors
+export LC_ALL="en_US.UTF-8"
+export LANGUAGE="en_US.UTF-8"
+
 # Windows <-> Linux clipboard support
 mkdir ~/lemonade_tmp
 wget -P ~/lemonade_tmp/ -q https://github.com/pocke/lemonade/releases/download/v1.1.1/lemonade_linux_amd64.tar.gz
@@ -11,22 +15,28 @@ tar xzf ~/lemonade_tmp/lemonade_linux_amd64.tar.gz -C ~/lemonade_tmp/
 sudo cp ~/lemonade_tmp/lemonade /usr/local/bin
 rm -rf ~/lemonade_tmp/
 
-# Add repos
-sudo zypper -n addrepo http://download.opensuse.org/repositories/editors/openSUSE_Leap_42.2/editors.repo
-sudo zypper -n refresh
+# Nix package manager
+curl https://nixos.org/nix/install | sh
+source ~/.nix-profile/etc/profile.d/nix.sh
+
+# Git
+nix-env -i git
 
 # Tmux
-sudo zypper -n in tmux
+nix-env -i tmux
 
 # Neovim + plugins
-sudo zypper -n in neovim python-neovim python3-neovim
+nix-env -i neovim python27Packages.neovim python36Packages.neovim
 
 # Zsh + Zgen
-sudo zypper -n in zsh
+nix-env -i zsh
 git clone https://github.com/tarjoilija/zgen.git "${HOME}/.zgen"
 
+# Set default shell
+chsh -s $(which tmux)
+
 # Gnu Stow
-sudo zypper -n in stow
+nix-env -i stow
 
 # Restore dotfiles
 stow tmux nvim zsh
@@ -38,32 +48,18 @@ nvim --headless +PlugInstall +qall
 # Development stuff
 #
 
-# Redis
-sudo zypper -n in redis
+# Redis/Node/Psql
+nix-env -i redis nodejs postgresql
 
-# Node/npm
-sudo zypper -n in nodejs npm
+# Ruby/Elixir
+nix-env -i ruby
+nix-env -i elixir
 
-# Postgresql client
-sudo zypper -n in postgresql
-
-# Asdf version manager
-git clone https://github.com/asdf-vm/asdf.git "${HOME}/.asdf" --branch v0.3.0
-. $HOME/.asdf/asdf.sh
-
-# Ruby
-asdf plugin-add ruby
-asdf install ruby 2.4.0
-asdf global ruby 2.4.0
-
+# Ruby gems
 zsh -c "gem install bundler"
 zsh -c "gem install foreman"
 zsh -c "gem install rails -v 5.0.1"
 
-# Elixir
-asdf plugin-add elixir
-asdf install elixir 1.5.0
-asdf global elixir 1.5.0
-
+# Elixir mix
 zsh -c "mix local.hex"
 zsh -c "mix archive.install https://github.com/phoenixframework/archives/raw/master/phx_new.ez"
