@@ -36,6 +36,9 @@ export LC_ALL="en_US.UTF-8"
 export LANGUAGE="en_US.UTF-8"
 export LOCALE_ARCHIVE="$(readlink ~/.nix-profile/lib/locale)/locale-archive"
 
+# Clean up generations older than 5 days
+nix-env --delete-generations 5d &> /dev/null
+nix-store --gc &> /dev/null
 
 # # # # # # # # # # #
 #  Alias/Functions  #
