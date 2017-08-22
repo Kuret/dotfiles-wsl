@@ -1,6 +1,7 @@
 # Dotfiles
 
-This repo contains my dotfiles and OS/Distro specific scripts, which will install:
+This repo contains my dotfiles and an install script utilizing the Nix package manager, which will install:
+- Nix
 - Git
 - Tmux
 - Neovim + Plugins
@@ -9,13 +10,16 @@ This repo contains my dotfiles and OS/Distro specific scripts, which will instal
 - Redis
 - Nodejs
 - PostgreSQL
-- Ruby
-- Ruby gems: Bundler + Foreman + Rails 5.0.1
-- Elixir + Phoenix
+- Asdf version manager with Ruby/Erlang/Elixir plugins
+- Ruby + Bundler/Foreman/Rails
+- Erlang + Elixir
 
 Supported setups when using the install script (for now):
 - Windows Subsystem for Linux (Tested on the Windows Store version of OpenSUSE LEAP 42.2)
-- Hyper-V with Arch Linux
+
+Untested but likely to work:
+- MacOS/OSX
+- Any Linux distro that can run the Nix package manager
 
 # Running the script
 
@@ -28,7 +32,7 @@ cd ~
 git clone git@github.com:Kuret/dotfiles.git
 cd dotfiles
 chmod +x install.sh
-./install-{distro}.sh
+./install-nix.sh
 ```
 
 # Manually
@@ -41,13 +45,6 @@ chmod +x install.sh
 
 Requirements before running the script:
 - Git
-
-# Arch setup
-
-Requirements before running the script:
-- Locale set (LANG, LANGUAGE, LC_ALL, etc)
-- Git
-- Yaourt
 
 # Permissions
 
@@ -99,51 +96,6 @@ For easy cross platform connection in a dev setup:
 - In your .bashrc/.zshrc add the following: `export PGHOST=localhost`
 - You should be able to connect using just the command `psql` now
 
-# Hyper-V
-
-When running Arch in Hyper-V, following steps are needed to SHH into it properly:
-- In Hyper-V create a Virtual Switch -> External switch bound to internet-connected network adapter on host
-- Install Arch as normal
-- Install required packages
-
-   `sudo pacman -S openssh samba`
-
-- Edit samba config to SSH by hostname
-
-  `sudo nano /etc/samba/smb.conf`
-
-  Add/edit the following lines
-
-    ```
-    workgroup = WORKGROUP
-    netbios name = <your-host-name>
-    ```
-- Enable and start services
-
-  ```
-  systemctl enable sshd
-  systemctl start sshd
-  systemctl enable smbd.service
-  systemctl start smbd.service
-  systemctl enable nmbd.service
-  systemctl start nmbd.service
-  ```
-  
-- Edit/uncomment sections in `/etc/ssh/sshd_config`
-  
-  ```
-  PubkeyAuthentication yes
-  RSAAuthentication yes
-  ```
-  
-- Cygwin
-
-   Install Cygwin + openssh
-
-  In cygwin: `ssh -t rsa`
-  
-  Copy the `id_rsa.pub` content to the Arch's .ssh/authorized_keys
-  
 # Git config
 
   ```
