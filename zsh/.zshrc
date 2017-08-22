@@ -15,6 +15,8 @@ autoload -Uz compinit
 compinit
 
 
+export PGHOST=localhost
+
 # # # # # # #
 #   Asdf    #
 # # # # # # #
@@ -27,7 +29,6 @@ source ~/.asdf/completions/asdf.bash
 #   Nix     #
 # # # # # # #
 
-source ~/.asdf/asdf.sh
 source ~/.nix-profile/etc/profile.d/nix.sh
 
 # Fix locale errors
@@ -50,12 +51,12 @@ source ~/.config/zsh/functions
 
 # Theme config
 DEFAULT_USER=`whoami`
-SHELLDER_DIRECTORY_BG=black
-SHELLDER_DIRECTORY_FG=white
+SHELLDER_DIRECTORY_BG=white
+SHELLDER_DIRECTORY_FG=black
 
 # Zplug
 source ~/.zplug/init.zsh
-zplug 'simnalamburt/shellder', as:theme
+zplug 'simnalamburt/shellder', as:theme 
 
 # Install plugins if there are plugins that have not been installed
 if ! zplug check --verbose; then
