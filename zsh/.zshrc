@@ -41,9 +41,8 @@ export LOCALE_ARCHIVE="$(readlink ~/.nix-profile/lib/locale)/locale-archive"
 #  Alias/Functions  #
 # # # # # # # # # # #
 
-source ~/.asdf/asdf.sh
 source ~/.config/zsh/functions
-
+source ~/.config/zsh/alias
 
 # # # # # # #
 #   Zplug   #

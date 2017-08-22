@@ -1,0 +1,2 @@
+alias nixi="nix-env -i"
+alias nixu="nix-env -e"
