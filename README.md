@@ -23,7 +23,8 @@ Untested but likely to work:
 
 # Running the script
 
-**Make sure you have everything setup correctly, as described below**
+Requirements before running the script:
+- Git
 
 The script requires root and will ask for the root password by itself, **don't start the script as root, use your normal user**
 
@@ -41,11 +42,6 @@ chmod +x install.sh
 - Install whatever packages you need
 - Use `stow` to symlink the dotfiles
 
-# WSL setup
-
-Requirements before running the script:
-- Git
-
 # Permissions
 
 **This isn't needed if you already have a user you can `sudo` with**
@@ -62,7 +58,7 @@ Requirements before running the script:
    
    `%wheel  ALL=(ALL) NOPASSWD: ALL`
 
-# Windows Subsystem For Linux
+# Windows Subsystem For Linux Setup
 
 Activate the WSL in windows:
 - Make sure you are running a Windows 10 build with Windows Store support for WSL (build 16215+)
@@ -73,12 +69,17 @@ Activate the WSL in windows:
 - Go to the Windows store and install the package `OpenSUSE Leap` or `Ubuntu` (Did not verify this script on Ubuntu)
 - Run the user setup and set your username and passwords
 
+# Cross platform copy-pasting
+
 For cross platform copy-paste support I use Lemonade: https://github.com/pocke/lemonade
 - The install script installs the Linux client
 - Download the Windows application from https://github.com/pocke/lemonade/releases
 - Unzip the Windows version and put the `lemonade.exe` in a convenient directory
 - To run the server open a command prompt and run `lemonade.exe server`
-- To run the server in the background without showing a terminal window create a file `lemonade.vbs` and put in the following
+- To send something to the clipboard from Linux run `lemonade copy "YourClipboardText"` or `OutputToPipe | lemonade copy`
+
+Running the server in the background without showing the terminal window:
+- Create a file `lemonade.vbs` in a convenient location and put in the following
    ```
    Dim WinScriptHost
    Set WinScriptHost = CreateObject("WScript.Shell")
@@ -87,7 +88,7 @@ For cross platform copy-paste support I use Lemonade: https://github.com/pocke/l
    ```
 - To run this automatically on startup create a registry key in `HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Run` with the value `WScript C:\Path\To\lemonade.vbs`
 
-- To send something to the clipboard from Linux run `lemonade copy "YourClipboardText"` or `OutputToPipe | lemonade copy`
+# Connecting to a PostgreSQL server running on the Windows host
 
 I recommend running PSQL Portable from Windows: https://github.com/garethflowers/postgresql-portable
 For easy cross platform connection in a dev setup:
