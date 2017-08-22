@@ -38,7 +38,7 @@ chmod +x install.sh
 
 # Manually
 
-- Install GNU Stow using you package manager
+- Install GNU Stow using your package manager
 - Install whatever packages you need
 - Use `stow` to symlink the dotfiles
 
