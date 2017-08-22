@@ -91,6 +91,7 @@ Running the server in the background without showing the terminal window:
 # Connecting to PostgreSQL on the Windows host
 
 I recommend running PSQL Portable from Windows: https://github.com/garethflowers/postgresql-portable
+
 For easy cross platform connection in a dev setup:
 - Make a superuser with the same username as your linux user
 - Make a default database with the same name as your linux user
