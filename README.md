@@ -88,7 +88,7 @@ Running the server in the background without showing the terminal window:
    ```
 - To run this automatically on startup create a registry key in `HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Run` with the value `WScript C:\Path\To\lemonade.vbs`
 
-# Connecting to a PostgreSQL server running on the Windows host
+# Connecting to PostgreSQL on the Windows host
 
 I recommend running PSQL Portable from Windows: https://github.com/garethflowers/postgresql-portable
 For easy cross platform connection in a dev setup:
