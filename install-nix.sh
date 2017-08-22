@@ -45,7 +45,7 @@ chmod -R 755 ~/.zplug
 nix-env -i stow
 
 # Restore dotfiles
-stow tmux nvim zsh
+stow tmux nvim zsh bin
 
 nvim --headless +UpdateRemotePlugins +qall
 nvim --headless +PlugInstall +qall

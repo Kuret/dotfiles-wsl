@@ -23,6 +23,7 @@ set termguicolors                     " enable true colors
 set wildmenu                          " enable wildmenu
 set wildmode=longest:full,full        " configure wildmenu
 set lazyredraw                        " don't draw everything
+set mouse=a                           " mouse support
 
 " whitespace
 set expandtab                         " use tabs instead of spaces

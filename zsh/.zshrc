@@ -14,8 +14,20 @@ zstyle :compinstall filename '/home/rick/.zshrc'
 autoload -Uz compinit
 compinit
 
+# # # # # # #
+#  Exports  #
+# # # # # # #
 
+# Add the HOME bin directory to the PATH
+export PATH="${HOME}/bin:${PATH}"
+
+# Set default editor
+export VISUAL=nvim
+export EDITOR="$VISUAL"
+
+# Needed to connect to PSQL on Windows host
 export PGHOST=localhost
+
 
 # # # # # # #
 #   Asdf    #
@@ -44,8 +56,11 @@ nix-store --gc &> /dev/null
 #  Alias/Functions  #
 # # # # # # # # # # #
 
-source ~/.config/zsh/functions
-source ~/.config/zsh/alias
+if [ -d ~/.config/zsh/functions ]; then
+  for file in ~/.config/zsh/functions/*.zsh; do
+    source $file
+  done
+fi
 
 # # # # # # #
 #   Zplug   #
