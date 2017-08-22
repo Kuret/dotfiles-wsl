@@ -28,6 +28,8 @@ export EDITOR="$VISUAL"
 # Needed to connect to PSQL on Windows host
 export PGHOST=localhost
 
+# Set default browser to Opera on Windows
+export BROWSER="/mnt/c/Program\ Files/Opera/launcher.exe"
 
 # # # # # # #
 #   Asdf    #
