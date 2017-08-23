@@ -68,6 +68,17 @@ Activate the WSL in windows:
    
 - Go to the Windows store and install the package `OpenSUSE Leap` or `Ubuntu` (Did not verify this script on Ubuntu)
 - Run the user setup and set your username and passwords
+- For a terminal emulator I would highly recommend https://github.com/mintty/wsltty or alternatively Hyperterm
+
+# Wsltty setup
+
+- Make sure your Locale/Character set and Language options are set correctly
+- In the looks settings check `Blinking` and whatever cursor style you prefer
+- In the font settings choose a NERD Font (https://github.com/ryanoasis/nerd-fonts)
+- In the font settings check `Show bold as font`, `Show bold as color` and `Allow blinking`
+- In the window settings set `Scrollbar` to `None` since that wont work really well using tmux anyways
+- In the terminal settings set `Type` to `xterm-256color`
+- To install a colorscheme download a `<colorscheme>.minttyrc` file and put it in `%appdata%\wsltty\themes`
 
 # Cross platform copy-pasting
 
@@ -122,4 +133,5 @@ For easy cross platform connection in a dev setup:
   `ssh -T git@github.com` to verify ssh connection
 
 # Issues
+- Currently only does a single user install of Nix so any package installed using Nix won't be able to run as a different user (Including running as root with `sudo`)
 - Couldn't get Qt5/Qt5Webkit/Qmake to work using Nix, refer to https://github.com/thoughtbot/capybara-webkit/wiki/Installing-Qt-and-compiling-capybara-webkit to install it on your OS if stuff fails to build.
