@@ -14,7 +14,7 @@ This repo contains my dotfiles and an install script utilizing the Nix package m
 - Ruby + Bundler/Foreman/Rails
 - Erlang + Elixir
 
-Supported setups when using the install script (for now):
+Tested OSes when using the install script:
 - Windows Subsystem for Linux (Tested on the Windows Store version of OpenSUSE LEAP 42.2)
 
 Untested but likely to work:
