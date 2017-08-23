@@ -88,6 +88,16 @@ Running the server in the background without showing the terminal window:
    ```
 - To run this automatically on startup create a registry key in `HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Run` with the value `WScript C:\Path\To\lemonade.vbs`
 
+# Open links on the Windows host
+
+The `bin` folder contains the script `wsl-browser-bridge` which opens links on the Windows host, which does several things:
+- If the supplied path is not found on the client it will assume it is an URL and passes it to the host
+- If the supplied path starts with the `/mnt/c/` it will replace that with `C:/`
+- If the supplied path starts with anything else (like `/home/username`) it will try to copy the file referenced in the path to `C:/temp/` and pass the path to the host
+- Set the `BROWSER` environment variable to `wsl-browser-bridge` to set the client's default browser to this script
+
+_Please note that this won't work properly for opening folders or when trying to open a .html file on the host with external dependencies (images, javascript etc) since it will only copy the single file that's passed to the command._
+
 # Connecting to PostgreSQL on the Windows host
 
 I recommend running PSQL Portable from Windows: https://github.com/garethflowers/postgresql-portable
@@ -110,3 +120,6 @@ For easy cross platform connection in a dev setup:
   `cat ~/.ssh/id_rsa.pub`, paste key into Github account > SSH Keys
   
   `ssh -T git@github.com` to verify ssh connection
+
+# Issues
+- Couldn't get Qt5/Qt5Webkit/Qmake to work using Nix, refer to https://github.com/thoughtbot/capybara-webkit/wiki/Installing-Qt-and-compiling-capybara-webkit to install it on your OS if stuff fails to build.
