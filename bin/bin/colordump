@@ -3,6 +3,9 @@
 #
 # Dump a table of ASCII colors to a 256-color compatible terminal.
 # With `-b`, switch to outputting background color samples.
+#
+# COPIED FROM https://github.com/mislav/dotfiles
+
 set -e
 
 if [ "$1" = "-b" ]; then

@@ -1,0 +1,16 @@
+#!/bin/bash
+set -e
+
+if [ -e $1 ]; then
+  # Valid path
+  if [[ $1 == '/mnt/c/'* ]]; then
+    path=$(echo $1 | sed 's#/mnt/c/#C:/#g')
+  else
+    cp $1 /mnt/c/temp/
+    file=$(basename $1)
+    path="C:/temp/${file}"
+  fi
+  /mnt/c/Windows/System32/cmd.exe /c start $path 
+else
+  /mnt/c/Windows/System32/cmd.exe /c start $1
+fi

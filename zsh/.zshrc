@@ -29,7 +29,7 @@ export EDITOR="$VISUAL"
 export PGHOST=localhost
 
 # Set default browser to Opera on Windows
-export BROWSER="/mnt/c/Program\ Files/Opera/launcher.exe"
+export BROWSER="wsl-browser-bridge"
 
 # # # # # # #
 #   Asdf    #
@@ -54,15 +54,6 @@ export LOCALE_ARCHIVE="$(readlink ~/.nix-profile/lib/locale)/locale-archive"
 nix-env --delete-generations 5d &> /dev/null
 nix-store --gc &> /dev/null
 
-# # # # # # # # # # #
-#  Alias/Functions  #
-# # # # # # # # # # #
-
-if [ -d ~/.config/zsh/functions ]; then
-  for file in ~/.config/zsh/functions/*.zsh; do
-    source $file
-  done
-fi
 
 # # # # # # #
 #   Zplug   #
@@ -87,4 +78,15 @@ fi
 
 # Load plugins
 zplug load
+
+
+# # # # # # # # # # #
+#  Alias/Functions  #
+# # # # # # # # # # #
+
+if [ -d ~/.config/zsh/functions ]; then
+  for file in ~/.config/zsh/functions/*.zsh; do
+    source $file
+  done
+fi
 
