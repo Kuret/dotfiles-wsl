@@ -1,0 +1,4 @@
+#!/bin/bash
+set -e
+
+echo "This is an example, scripts need to be in this format."

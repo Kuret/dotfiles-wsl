@@ -54,12 +54,23 @@ nvim --headless +PlugInstall +qall
 # Development stuff
 #
 
-# Redis/Node/Psql
-nix-env -i redis nodejs postgresql
+# Nginx
+# Since nix runs in userland, make sure to set a different config dir with -p
+nix-env -i nginx
+
+# Redis/Psql
+nix-env -i redis postgresql
 
 # Asdf version manager
 git clone https://github.com/asdf-vm/asdf.git "${HOME}/.asdf" --branch v0.3.0
 source ~/.asdf/asdf.sh
+
+# Node
+asdf plugin-add nodejs https://github.com/asdf-vm/asdf-nodejs.git
+bash ~/.asdf/plugins/nodejs/bin/import-release-team-keyring # Node.js team's PGP keys
+
+asdf install nodejs 8.4.0
+asdf global nodejs 8.4.0
 
 # Ruby
 asdf plugin-add ruby https://github.com/asdf-vm/asdf-ruby.git
