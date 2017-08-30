@@ -13,6 +13,9 @@ nnoremap <cr> o<esc>
 " reload vim config
 nnoremap <leader>r :source $MYVIMRC<CR>
 
+" ESC quits the terminal
+tnoremap <Esc> <C-\><C-n>:q<CR> 
+
 " upper or lowercase the current word
 nnoremap <leader><Up> gUiW
 nnoremap <leader><Down> guiW
@@ -45,6 +48,19 @@ nnoremap <S-J> :tabc<CR>
 nnoremap <S-K> :tabnew<CR>
 nnoremap <S-O> :tabo<CR>
 
+" Alchemist: Go to definition in new split and rebind go to Doc
+nnoremap <leader>] :split <bar> ExDef<CR>
+nnoremap <leader>[ :ExDoc<CR>
+
+" Alchemist: Save file, Compile and open IEx
+nnoremap <leader>es :w<CR>:Mix<Space>compile<CR>:IEx<CR><CR>
+nnoremap <leader>eb :w<CR>:Mix<Space>compile<CR><CR>
+
+" Omni complete
+inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+inoremap <C-Space> <C-x><C-o>
+inoremap <C-@> <C-Space>
+
 " Window swap
 let g:windowswap_map_keys = 0 "prevent default bindings
 nnoremap <silent> <C-W> :call WindowSwap#EasyWindowSwap()<CR>
@@ -55,14 +71,21 @@ nnoremap <silent> <C-D> :NERDTreeToggle<CR>
 " Grep word under cursor
 nnoremap <C-S-F> :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
 
+" Navigate between linter errors
+nnoremap <silent> <leader>ll <Plug>(ale_next_wrap)
+nnoremap <silent> <leader>lk <Plug>(ale_previous_wrap)
+
+" Manually lint
+nnoremap <silent> <leader>l :ALELint<CR>
+
 " Repeat last test
-nnoremap <silent> <C-E> :TestLast<CR> 
+nnoremap <silent> <leader>tl :TestLast<CR> 
 " Test under cursor
-nnoremap <silent> <C-R> :TestNearest<CR> 
+nnoremap <silent> <leader>tt :TestNearest<CR> 
 " Test current file
-nnoremap <silent> <C-T> :TestFile<CR> 
+nnoremap <silent> <leader>tf :TestFile<CR> 
 " Run all tests
-nnoremap <silent> <C-Y> :TestSuite<CR> 
+nnoremap <silent> <leader>ta :TestSuite<CR> 
 " Navigate to last test
-nnoremap <silent> <C-U> :TestVisit<CR> 
+nnoremap <silent> <leader>tv :TestVisit<CR> 
 

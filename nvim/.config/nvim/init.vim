@@ -52,6 +52,9 @@ if !&readonly && &modifiable
 endif
   set encoding=utf-8                  " the encoding displayed
 
+" omni completion
+set omnifunc=syntaxcomplete#Complete
+set completeopt=longest,menuone
 
 " Allows cursor change in tmux mode
 if exists('$TMUX')

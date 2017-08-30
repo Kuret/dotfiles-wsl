@@ -1,8 +1,12 @@
 call plug#begin('~/.config/nvim/plugged')
+Plug 'powerman/vim-plugin-AnsiEsc'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'wesQ3/vim-windowswap'
 Plug 'sheerun/vim-polyglot'
-Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+Plug 'SirVer/ultisnips'
+Plug 'honza/vim-snippets'
+Plug 'slashmili/alchemist.vim'
+Plug 'avdgaag/vim-phoenix'
 Plug 'w0rp/ale'
 Plug 'janko-m/vim-test'
 Plug 'airblade/vim-gitgutter'

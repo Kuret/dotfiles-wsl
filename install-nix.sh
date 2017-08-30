@@ -45,7 +45,7 @@ chmod -R 755 ~/.zplug
 nix-env -i stow
 
 # Restore dotfiles
-stow tmux nvim zsh bin
+stow tmux nvim zsh nginx bin
 
 nvim --headless +UpdateRemotePlugins +qall
 nvim --headless +PlugInstall +qall
@@ -53,6 +53,9 @@ nvim --headless +PlugInstall +qall
 #
 # Development stuff
 #
+
+# Inotify tools, needed for Phoenix
+nix-env -i inotify-tools
 
 # Nginx
 # Since nix runs in userland, make sure to set a different config dir with -p

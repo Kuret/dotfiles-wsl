@@ -2,7 +2,6 @@
 #  General  #
 # # # # # # #
 
-source ~/.asdf/asdf.sh
 HISTFILE=~/.config/zsh/.histfile
 HISTSIZE=4000
 SAVEHIST=4000
@@ -13,6 +12,13 @@ bindkey -e
 zstyle :compinstall filename '/home/rick/.zshrc'
 autoload -Uz compinit
 compinit
+
+# # # # # # #
+# Keybinds  #
+# # # # # # #
+
+# Vim bindings
+bindkey -v
 
 # # # # # # #
 #  Exports  #
@@ -51,8 +57,8 @@ export LANGUAGE="en_US.UTF-8"
 export LOCALE_ARCHIVE="$(readlink ~/.nix-profile/lib/locale)/locale-archive"
 
 # Clean up generations older than 5 days
-nix-env --delete-generations 5d &> /dev/null
-nix-store --gc &> /dev/null
+#nix-env --delete-generations 5d &> /dev/null
+#nix-store --gc &> /dev/null
 
 
 # # # # # # #
@@ -69,6 +75,8 @@ SHELLDER_GIT_CLEAN_BG=cyan
 
 # Zplug
 source ~/.zplug/init.zsh
+
+zplugs=()
 zplug 'simnalamburt/shellder', as:theme 
 
 # Install plugins if there are plugins that have not been installed
