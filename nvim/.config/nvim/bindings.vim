@@ -71,12 +71,8 @@ nnoremap <silent> <C-D> :NERDTreeToggle<CR>
 " Grep word under cursor
 nnoremap <C-S-F> :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
 
-" Navigate between linter errors
-nnoremap <silent> <leader>ll <Plug>(ale_next_wrap)
-nnoremap <silent> <leader>lk <Plug>(ale_previous_wrap)
-
 " Manually lint
-nnoremap <silent> <leader>l :ALELint<CR>
+nnoremap <silent> <leader>l :Neomake<CR>
 
 " Repeat last test
 nnoremap <silent> <leader>tl :TestLast<CR> 

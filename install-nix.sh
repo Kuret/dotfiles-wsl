@@ -47,6 +47,9 @@ nix-env -i stow
 # Restore dotfiles
 stow tmux nvim zsh nginx bin
 
+# Silver searcher (ag), faster than grep
+nix-env -i silver-searcher
+
 nvim --headless +UpdateRemotePlugins +qall
 nvim --headless +PlugInstall +qall
 
