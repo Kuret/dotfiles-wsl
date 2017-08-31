@@ -27,45 +27,32 @@ export LC_ALL="en_US.UTF-8"
 export LANGUAGE="en_US.UTF-8"
 export LOCALE_ARCHIVE="$(readlink ~/.nix-profile/lib/locale)/locale-archive"
 
-# Git
-nix-env -i git
-
-# Tmux
-nix-env -i tmux
-
-# Neovim + plugins
+# Install Git, Tmux, Zsh, Stow, Silver Searcher, Neovim(+plugins)
+nix-env -i git tmux zsh stow silver-searcher
 nix-env -iA nixpkgs.neovim nixpkgs.python27Packages.neovim nixpkgs.python36Packages.neovim
 
-# Zsh + Zplug
-nix-env -i zsh
+# Zplug
 curl -sL --proto-redir -all,https https://raw.githubusercontent.com/zplug/installer/master/installer.zsh| zsh
 chmod -R 755 ~/.zplug
-
-# Gnu Stow
-nix-env -i stow
 
 # Restore dotfiles
 stow tmux nvim zsh nginx npm bin
 
-# Silver searcher (ag), faster than grep
-nix-env -i silver-searcher
-
+# Install Neovim plugins
 nvim --headless +UpdateRemotePlugins +qall
 nvim --headless +PlugInstall +qall
 
-#
-# Development stuff
-#
 
-# Inotify tools, needed for Phoenix
-nix-env -i inotify-tools
+# # # # # # # # # # #
+# Development stuff #
+# # # # # # # # # # #
 
-# Nginx
-# Since nix runs in userland, make sure to set a different config dir with -p
-nix-env -i nginx
-
-# Redis/Psql
-nix-env -i redis postgresql
+# Installs:
+#   Inotify: needed for Phoenix
+#   Yarn
+#   Nginx: Nix runs in userland, set a different config dir with -p (example in zsh/funtions)
+#   Redis/Psql
+nix-env -i inotify-tools yarn nginx redis postgresql
 
 # Asdf version manager
 git clone https://github.com/asdf-vm/asdf.git "${HOME}/.asdf" --branch v0.3.0
