@@ -45,7 +45,7 @@ chmod -R 755 ~/.zplug
 nix-env -i stow
 
 # Restore dotfiles
-stow tmux nvim zsh nginx bin
+stow tmux nvim zsh nginx npm bin
 
 # Silver searcher (ag), faster than grep
 nix-env -i silver-searcher
