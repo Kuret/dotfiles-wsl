@@ -1,30 +1,23 @@
 # Dotfiles
 
-This repo contains my dotfiles and an install script utilizing the Nix package manager, which will install:
-- Nix
-- Git
+This repo contains my dotfiles and an install script for Ubuntu on Windows Subsystem for Linux, which will install:
+- Common build/development packages
 - Tmux
-- Neovim + Plugins
 - Zsh + Zplug
 - Stow (to symlink dotfiles)
+- Silver searcher (ag)
+- Neovim + Plugins
+- ImageMagick
+- Yarn
+- Nginx
 - Redis
-- Nodejs
-- PostgreSQL
-- Asdf version manager with Ruby/Erlang/Elixir plugins
-- Ruby + Bundler/Foreman/Rails
-- Erlang + Elixir
-
-Tested OSes when using the install script:
-- Windows Subsystem for Linux (Tested on the Windows Store version of OpenSUSE LEAP 42.2)
-
-Untested but likely to work:
-- MacOS/OSX
-- Any Linux distro that can run the Nix package manager
+- PostgreSQL (Client only, see below)
+- Erlang/OTP20
+- Asdf version manager with Node/Ruby/Elixir plugins
+- Ruby gems: Bundler/Foreman/Rails
+- Elixir mix: Hex/Phoenix
 
 # Running the script
-
-Requirements before running the script:
-- Git
 
 The script requires root and will ask for the root password by itself, **don't start the script as root, use your normal user**
 
@@ -33,7 +26,7 @@ cd ~
 git clone git@github.com:Kuret/dotfiles.git
 cd dotfiles
 chmod +x install.sh
-./install-nix.sh
+./install.sh
 ```
 
 # Manually
@@ -104,15 +97,19 @@ Running the server in the background without showing the terminal window:
 The `bin` folder contains the script `wsl-browser-bridge` which opens links on the Windows host, which does several things:
 - If the supplied path is not found on the client it will assume it is an URL and passes it to the host
 - If the supplied path starts with the `/mnt/c/` it will replace that with `C:/`
-- If the supplied path starts with anything else (like `/home/username`) it will try to copy the file referenced in the path to `C:/temp/` and pass the path to the host
+- If the supplied path starts with anything else (like `/home/username`) it will try to copy the file/folder referenced in the path to `C:/temp/` and pass the path to the host
 - Set the `BROWSER` environment variable to `wsl-browser-bridge` to set the client's default browser to this script
 
-_Please note that this won't work properly for opening folders or when trying to open a .html file on the host with external dependencies (images, javascript etc) since it will only copy the single file that's passed to the command._
+_Beware when trying to open a file in a big folder, it will try to copy over the whole thing to the Windows side._
 
 # Connecting to PostgreSQL on the Windows host
 
-I recommend running PSQL Portable from Windows: https://github.com/garethflowers/postgresql-portable
+On the Windows side, before running the script:
+- Install PostgreSQL on Windows however you like
+- Make sure the credentials are the defaults (postgres/postgres)
+- Obviously don't use these in a production setup
 
+**Steps below should automatically be done by the install script, don't run if the 'psql' command succeeds**
 For easy cross platform connection in a dev setup:
 - Make a superuser with the same username as your linux user
 - Make a default database with the same name as your linux user
@@ -133,5 +130,4 @@ For easy cross platform connection in a dev setup:
   `ssh -T git@github.com` to verify ssh connection
 
 # Issues
-- Currently only does a single user install of Nix so any package installed using Nix won't be able to run as a different user (Including running as root with `sudo`)
-- Couldn't get Qt5/Qt5Webkit/Qmake to work using Nix, refer to https://github.com/thoughtbot/capybara-webkit/wiki/Installing-Qt-and-compiling-capybara-webkit to install it on your OS if stuff fails to build.
+- I'm sure there are, tell me.
