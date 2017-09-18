@@ -68,7 +68,15 @@ nvim --headless +PlugInstall +qall
 #   Yarn
 #   Nginx, set config dir with -p (example in zsh/funtions)
 #   Redis/Psql client
-sudo apt-get -y install inotify-tools yarn nginx redis-server postgresql-client-common postgresql-client libpq-dev
+sudo apt-get -y install inotify-tools yarn nginx redis-server
+
+# Postgres
+# Assumes a postgres server is running on the windows side
+# with default credentials (postgres/postgres)
+# Afterwards you should be able to connect using just 'psql'
+sudo apt-get -y install postgresql-client-common postgresql-client libpq-dev
+psql -U postgres -c "CREATE USER $USER WITH SUPERUSER"
+psql -U postgres -c "CREATE DATABASE $USER"
 
 # Asdf version manager
 git clone https://github.com/asdf-vm/asdf.git "${HOME}/.asdf" --branch v0.3.0
