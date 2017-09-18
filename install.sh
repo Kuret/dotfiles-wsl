@@ -30,7 +30,7 @@ sudo apt-get -y install software-properties-common build-essential autoconf m4 l
 sudo apt-get -y install libwxgtk3.0-dev libgl1-mesa-dev libglu1-mesa-dev libpng3
 
 # Install Tmux, Zsh, Stow, Silver Searcher
-sudo apt-get -y install software-properties-common build-essential zsh stow silversearcher-ag
+sudo apt-get -y install tmux zsh stow silversearcher-ag
 
 # Neovim
 sudo apt-get -y install neovim
