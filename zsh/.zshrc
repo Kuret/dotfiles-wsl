@@ -66,20 +66,6 @@ export MANPATH="$NPM_PACKAGES/share/man:$(manpath)"
 
 export PATH="$HOME/.yarn/bin:$PATH"
 
-# # # # # # #
-#   Nix     #
-# # # # # # #
-
-if [ -d ~/.nix-profile ]; then
-  source ~/.nix-profile/etc/profile.d/nix.sh
-  export LOCALE_ARCHIVE="$(readlink ~/.nix-profile/lib/locale)/locale-archive"
-  
-  # Clean up generations older than 5 days
-  #nix-env --delete-generations 5d &> /dev/null
-  #nix-store --gc &> /dev/null
-fi
-
-
 
 # # # # # # #
 #   Zplug   #
