@@ -37,6 +37,10 @@ export PGHOST=localhost
 # Set default browser to Opera on Windows
 export BROWSER="wsl-browser-bridge"
 
+# Fix locale errors
+export LC_ALL="en_US.UTF-8"
+export LANGUAGE="en_US.UTF-8"
+
 # # # # # # #
 #   Asdf    #
 # # # # # # #
@@ -45,8 +49,11 @@ source ~/.asdf/asdf.sh
 source ~/.asdf/completions/asdf.bash
 
 # Npm -g without sudo
-NPM_PACKAGES="${HOME}/.npm-packages"
+if [ ! -d ~/.npm-packages ]; then
+  mkdir ${HOME}/.npm-packages
+fi
 
+NPM_PACKAGES="${HOME}/.npm-packages"
 PATH="$NPM_PACKAGES/bin:$PATH"
 
 # Unset manpath so we can inherit from /etc/manpath via the `manpath` command
@@ -56,22 +63,22 @@ export MANPATH="$NPM_PACKAGES/share/man:$(manpath)"
 # # # # # # #
 #   Yarn    #
 # # # # # # #
+
 export PATH="$HOME/.yarn/bin:$PATH"
 
 # # # # # # #
 #   Nix     #
 # # # # # # #
 
-source ~/.nix-profile/etc/profile.d/nix.sh
+if [ -d ~/.nix-profile ]; then
+  source ~/.nix-profile/etc/profile.d/nix.sh
+  export LOCALE_ARCHIVE="$(readlink ~/.nix-profile/lib/locale)/locale-archive"
+  
+  # Clean up generations older than 5 days
+  #nix-env --delete-generations 5d &> /dev/null
+  #nix-store --gc &> /dev/null
+fi
 
-# Fix locale errors
-export LC_ALL="en_US.UTF-8"
-export LANGUAGE="en_US.UTF-8"
-export LOCALE_ARCHIVE="$(readlink ~/.nix-profile/lib/locale)/locale-archive"
-
-# Clean up generations older than 5 days
-#nix-env --delete-generations 5d &> /dev/null
-#nix-store --gc &> /dev/null
 
 
 # # # # # # #
@@ -110,4 +117,3 @@ if [ -d ~/.config/zsh/functions ]; then
     source $file
   done
 fi
-

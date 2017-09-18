@@ -6,11 +6,10 @@ fi
 
 # Windows <-> Linux clipboard support
 if ! type -a lemonade &> /dev/null; then
-   mkdir ~/lemonade_tmp
-   wget -P ~/lemonade_tmp/ -q https://github.com/pocke/lemonade/releases/download/v1.1.1/lemonade_linux_amd64.tar.gz
-   tar xzf ~/lemonade_tmp/lemonade_linux_amd64.tar.gz -C ~/lemonade_tmp/
-   sudo cp ~/lemonade_tmp/lemonade /usr/local/bin
-   rm -rf ~/lemonade_tmp/
+   mkdir ~/temp
+   wget -P ~/temp/ -q https://github.com/pocke/lemonade/releases/download/v1.1.1/lemonade_linux_amd64.tar.gz
+   tar xzf ~/temp/lemonade_linux_amd64.tar.gz -C ~/temp/
+   sudo cp ~/temp/lemonade /usr/local/bin
 fi
 
 # Repos
@@ -20,6 +19,10 @@ sudo dpkg -i ~/temp/erlang-solutions_1.0_all.deb
 curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
 echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
 
+# Remove temp directory
+rm -r ~/temp
+
+# Update apt sources
 sudo apt-get -y update
 
 # Build/dev tools
