@@ -54,6 +54,9 @@ chmod -R 755 ~/.zplug
 # Restore dotfiles
 stow tmux nvim zsh nginx npm bin
 
+# Make files in ~/bin executable
+chmod +x ~/bin/*
+
 # Install Neovim plugins
 nvim --headless +UpdateRemotePlugins +qall
 nvim --headless +PlugInstall +qall
@@ -64,11 +67,12 @@ nvim --headless +PlugInstall +qall
 # # # # # # # # # # #
 
 # Installs:
-#   Inotify: needed for Phoenix
+#   Inotify: needed for Phoenix file watching
+#   Imagemagick
 #   Yarn
 #   Nginx, set config dir with -p (example in zsh/funtions)
-#   Redis/Psql client
-sudo apt-get -y install inotify-tools yarn nginx redis-server
+#   Redis/
+sudo apt-get -y install inotify-tools imagemagick yarn nginx redis-server
 
 # Postgres
 # Assumes a postgres server is running on the windows side
