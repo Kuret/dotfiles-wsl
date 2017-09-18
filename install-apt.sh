@@ -33,6 +33,9 @@ sudo apt-get -y install software-properties-common build-essential zsh stow silv
 sudo apt-get -y install neovim
 sudo apt-get -y install python-dev python-pip python3-dev python3-pip
 
+pip3 install --upgrade pip
+pip3 install neovim
+
 # Set neovim as default
 sudo update-alternatives --install /usr/bin/vi vi /usr/bin/nvim 60
 echo 0 | sudo update-alternatives --config vi
