@@ -59,7 +59,7 @@ Activate the WSL in windows:
 
    `Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Windows-Subsystem-Linux`
    
-- Go to the Windows store and install the package `OpenSUSE Leap` or `Ubuntu` (Did not verify this script on Ubuntu)
+- Go to the Windows store and install the package `Ubuntu`
 - Run the user setup and set your username and passwords
 - For a terminal emulator I would highly recommend https://github.com/mintty/wsltty or alternatively Hyperterm
 
