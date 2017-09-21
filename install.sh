@@ -26,7 +26,7 @@ rm -r ~/temp
 sudo apt-get -y update
 
 # Build/dev tools
-sudo apt-get -y install software-properties-common build-essential autoconf m4 libncurses5-dev unixodbc-dev
+sudo apt-get -y install aptitude software-properties-common build-essential autoconf m4 libncurses5-dev unixodbc-dev
 sudo apt-get -y install libwxgtk3.0-dev libgl1-mesa-dev libglu1-mesa-dev libpng3
 
 # Install Tmux, Zsh, Stow, Silver Searcher
