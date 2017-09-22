@@ -41,6 +41,9 @@ export BROWSER="wsl-browser-bridge"
 export LC_ALL="en_US.UTF-8"
 export LANGUAGE="en_US.UTF-8"
 
+# Set display
+export DISPLAY=localhost:0
+
 # # # # # # #
 #   Asdf    #
 # # # # # # #
