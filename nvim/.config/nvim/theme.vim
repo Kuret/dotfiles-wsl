@@ -5,14 +5,14 @@ let g:lightline = {
       \             [ 'filename', 'readonly', 'modified' ] ],
       \   'right': [ [ '' ],
       \              [ '' ],
-      \              [ 'filetype', 'lineinfo' ] ]
+      \              [ 'gitbranch', 'filetype', 'lineinfo' ] ]
       \ },
       \ 'inactive': {
       \   'left': [ [ '' ],
       \             [ 'filename', 'readonly', 'modified' ] ],
       \   'right': [ [ '' ],
       \              [ '' ],
-      \              [ 'filetype', 'lineinfo' ] ]
+      \              [ 'gitbranch', 'filetype', 'lineinfo' ] ]
       \ },
       \ 'tabline': {
       \     'left': [ [ 'tabs' ] ],
@@ -25,6 +25,9 @@ let g:lightline = {
       \ 'component': {
       \   'helloworld': 'Hello, world!'
       \ },
+      \ 'component_function': {
+      \   'gitbranch': 'gitbranch#name',
+      \ }
     \ }
 
 colorscheme gruvbox
