@@ -29,6 +29,9 @@ sudo apt-get -y update
 sudo apt-get -y install aptitude software-properties-common build-essential autoconf m4 libncurses5-dev unixodbc-dev
 sudo apt-get -y install libwxgtk3.0-dev libgl1-mesa-dev libglu1-mesa-dev libpng3
 
+# Gnome-settings-daemon, needed for HiDPI support in XServer
+sudo apt-get -y install gnome-settings-daemon
+
 # Install Tmux, Zsh, Stow, Silver Searcher
 sudo apt-get -y install tmux zsh stow silversearcher-ag
 
