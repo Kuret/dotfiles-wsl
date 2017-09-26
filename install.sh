@@ -26,11 +26,15 @@ rm -r ~/temp
 sudo apt-get -y update
 
 # Build/dev tools
-sudo apt-get -y install aptitude software-properties-common build-essential autoconf m4 libncurses5-dev unixodbc-dev
-sudo apt-get -y install libwxgtk3.0-dev libgl1-mesa-dev libglu1-mesa-dev libpng3
+sudo apt-get -y install aptitude software-properties-common build-essential
+sudo apt-get -y install libncurses5-dev unixodbc-dev cmake autoconf m4
 
-# Gnome-settings-daemon, needed for HiDPI support in XServer
-sudo apt-get -y install gnome-settings-daemon
+# Stuff for GUI applications
+sudo apt-get -y install libgl1-mesa-dev libglu1-mesa-dev libpng3
+sudo apt-get -y install libfreetype6-dev libfontconfig1-dev
+sudo apt-get -y install xcb xcb-proto libxcb-ewmh-dev python-xcbgen
+sudo apt-get -y install x11-xserver-utils xclip libwxgtk3.0-dev libgtk3.0
+sudo apt-get -y install xfce4-settings xfce4-panel compton
 
 # Install Tmux, Zsh, Stow, Silver Searcher
 sudo apt-get -y install tmux zsh stow silversearcher-ag
