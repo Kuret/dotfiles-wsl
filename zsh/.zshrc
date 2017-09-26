@@ -106,3 +106,11 @@ if [ -d ~/.config/zsh/functions ]; then
     source $file
   done
 fi
+
+
+# # # # # # # # # # #
+#  WSL Fixes	    #
+# # # # # # # # # # #
+
+# CD to user home, because WSL defaults$
+cd ~
