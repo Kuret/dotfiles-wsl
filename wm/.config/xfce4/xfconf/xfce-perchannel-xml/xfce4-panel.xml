@@ -34,6 +34,9 @@
     </property>
     <property name="plugin-6" type="string" value="systray">
       <property name="show-frame" type="bool" value="true"/>
+      <property name="names-visible" type="array">
+        <value type="string" value="opera"/>
+      </property>
     </property>
     <property name="plugin-3" type="string" value="windowck-plugin"/>
   </property>

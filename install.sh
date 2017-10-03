@@ -17,6 +17,7 @@ fi
 # Repos
 sudo add-apt-repository ppa:neovim-ppa/stable -y
 sudo add-apt-repository ppa:aguignard/ppa -y
+sudo add-apt-repository ppa:therealkenc/wsl-pulseaudio -y
 
 curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
 echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
@@ -47,6 +48,7 @@ sudo apt-get -y install x11-xserver-utils xclip libwxgtk3.0-dev libgtk3.0
 sudo apt-get -y install gnome-accessibility-themes gnome-themes-standard gnome-themes-standard-data
 
 sudo apt-get -y install xfce4-settings xfce4-panel compton lxappearance
+sudo apt-get -y install libpulse0=1:8.0-0ubuntu3.3ppa1
 sudo apt-get -y install nitrogen rofi
 
 sudo dpkg -i ~/temp/xfce4-windowck-plugin*.deb

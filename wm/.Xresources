@@ -1,12 +1,14 @@
+Xft.lcdfilter: lcddefault
 Xft.antialias: true
 Xft.hinting:   true
 Xft.rgba:      rgb
 Xft.hintstyle: hintfull
+Xft.dpi:       108
 
-rofi.width:                          30
-rofi.lines:                          10
+rofi.width:                          500
+rofi.lines:                          5
 rofi.columns:                        1
-rofi.font:                           DejaVu Sans Mono 6
+rofi.font:                           DejaVu Sans Mono 18
 rofi.fg:                             #002B36
 rofi.bg:                             #FDF6E3
 rofi.fg-active:                      #268BD2
@@ -28,14 +30,16 @@ rofi.color-urgent:                   argb:0000000, #f3843d, argb:0000000, #268bd
 rofi.color-active:                   argb:0000000, #268bd2, argb:0000000, #268bd2, #205171
 rofi.color-window:                   argb:b2000000, #268bd2, #268bd2
 
-rofi.bw:                             2
-rofi.padding:                        8
+rofi.bw:                             0
+rofi.padding:                        400
 rofi.lazy-filter-limit:              15000
 rofi.line-margin:                    3
-rofi.separator-style:                solid
+rofi.separator-style:                none
 rofi.hide-scrollbar:                 true
-rofi.fullscreen:                     false
-rofi.dpi:                            190
+rofi.fullscreen:                     true
+rofi.dpi:                            108
+
+rofi.terminal:			     termite
 
 rofi.kb-row-left:                    Control+Page_Up,Control+Left
 rofi.kb-row-right:                   Control+Page_Down,Control+Right

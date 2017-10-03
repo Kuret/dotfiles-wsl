@@ -1,4 +1,4 @@
-font pango:DejaVu Sans Mono 9
+font pango:DejaVu Sans Mono 10
 
 client.focused	#268bd2   #268bd2   #ffffff   #268bd2  #268bd2
 bindsym Mod1+d exec rofi -show run
@@ -15,7 +15,7 @@ set $right semicolon
 
 floating_modifier Mod1
 
-bindsym Mod1+Return exec terminator
+bindsym Mod1+Return exec termite -e /usr/bin/zsh
 
 bindsym Mod1+Shift+q kill
 
@@ -133,7 +133,8 @@ mode "resize" {
 
 bindsym Mod1+r mode "resize"
 
-exec --no-startup-id xfsettingsd
+exec --no-startup-id xfce4-volumed
+exec --no-startup-id xfsettingsd --sm-client-disable
 exec_always --no-startup-id xfce4-panel --disable-wm-check
 exec --no-startup-id nitrogen --restore
 exec --no-startup-id hsetroot -solid black

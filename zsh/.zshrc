@@ -44,6 +44,9 @@ export LANGUAGE="en_US.UTF-8"
 # Set display
 export DISPLAY=localhost:0
 
+# PulseAudio server
+export PULSE_SERVER=tcp:localhost
+
 # # # # # # #
 #   Asdf    #
 # # # # # # #
