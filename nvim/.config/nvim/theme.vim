@@ -32,3 +32,4 @@ let g:lightline = {
 
 colorscheme gruvbox
 
+hi Normal guibg=NONE ctermbg=NONE

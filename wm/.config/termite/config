@@ -1,5 +1,5 @@
 [options]
-font = Consolas NF 10
+font = Consolas Nerd Font 12
 browser = wsl-browser-bridge
 cursor_shape = ibeam
 

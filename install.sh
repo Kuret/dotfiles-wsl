@@ -35,6 +35,7 @@ sudo apt-get -y update
 # Build/dev tools
 sudo apt-get -y install aptitude software-properties-common build-essential
 sudo apt-get -y install libncurses5-dev unixodbc-dev cmake autoconf m4 libev-dev libyajl-dev
+sudo apt-get -y install qt5-default libqt5webkit5-dev gstreamer1.0-plugins-base gstreamer1.0-tools gstreamer1.0-x
 
 # Stuff for GUI applications
 sudo apt-get -y install libgl1-mesa-dev libglu1-mesa-dev libpng3
@@ -50,6 +51,8 @@ sudo apt-get -y install gnome-accessibility-themes gnome-themes-standard gnome-t
 sudo apt-get -y install xfce4-settings xfce4-panel compton lxappearance
 sudo apt-get -y install libpulse0=1:8.0-0ubuntu3.3ppa1
 sudo apt-get -y install nitrogen rofi
+
+sudo apt-get -y install ranger caca-utils highlight atool w3m poppler-utils mediainfo
 
 sudo dpkg -i ~/temp/xfce4-windowck-plugin*.deb
 sudo dpkg -i ~/temp/arc-theme*.deb
@@ -98,7 +101,7 @@ curl -sL --proto-redir -all,https https://raw.githubusercontent.com/zplug/instal
 chmod -R 755 ~/.zplug
 
 # Restore dotfiles
-stow tmux nvim zsh nginx npm bin
+stow tmux nvim zsh npm bin
 
 # Make files in ~/bin executable
 chmod +x ~/bin/*
@@ -141,8 +144,8 @@ asdf global nodejs 8.4.0
 
 # Ruby
 asdf plugin-add ruby https://github.com/asdf-vm/asdf-ruby.git
-asdf install ruby 2.4.0
-asdf global ruby 2.4.0
+asdf install ruby 2.4.2
+asdf global ruby 2.4.2
 
 zsh -c "gem install bundler"
 zsh -c "gem install foreman"

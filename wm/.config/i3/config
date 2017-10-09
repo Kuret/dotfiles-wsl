@@ -1,6 +1,6 @@
-font pango:DejaVu Sans Mono 10
+font pango:DejaVu Sans Mono 11
 
-client.focused	#268bd2   #268bd2   #ffffff   #268bd2  #268bd2
+client.focused	#d65d0e   #d65d0e   #ffffff   #d65d0e	#d65d0e
 bindsym Mod1+d exec rofi -show run
 
 for_window [title="^.*"] border pixel 2
