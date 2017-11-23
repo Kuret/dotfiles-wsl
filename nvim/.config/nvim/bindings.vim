@@ -1,6 +1,9 @@
 " set leader to space
 let mapleader = " "
 
+" map jj to <Esc>
+imap jj <Esc>
+
 " map semicolon to colon and vice versa
 nnoremap ; :
 nnoremap : ;

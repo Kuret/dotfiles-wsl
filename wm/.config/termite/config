@@ -2,6 +2,7 @@
 font = Consolas Nerd Font 12
 browser = wsl-browser-bridge
 cursor_shape = ibeam
+scrollback_lines = 99999
 
 [colors]
 # Base16 Gruvbox dark, medium

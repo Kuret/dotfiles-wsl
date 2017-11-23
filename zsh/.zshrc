@@ -3,7 +3,7 @@
 # # # # # # #
 
 HISTFILE=~/.config/zsh/.histfile
-HISTSIZE=4000
+HISTSIZE=99999
 SAVEHIST=4000
 setopt autocd extendedglob
 unsetopt BG_NICE

@@ -1,5 +1,5 @@
 #!/bin/bash
 source ~/.bashrc
 
-xrandr --dpi 108
+xfconf-query -c xsettings -p /Xft/DPI -s 96
 i3

@@ -37,6 +37,6 @@
     <property name="DecorationLayout" type="empty"/>
   </property>
   <property name="Xfce" type="empty">
-    <property name="LastCustomDPI" type="int" value="96"/>
+    <property name="LastCustomDPI" type="int" value="148"/>
   </property>
 </channel>
