@@ -61,36 +61,8 @@ Activate the WSL in windows:
    
 - Go to the Windows store and install the package `Ubuntu`
 - Run the user setup and set your username and passwords
-- For a terminal emulator I would highly recommend https://github.com/mintty/wsltty or alternatively Hyperterm
-
-# Wsltty setup
-
-- Make sure your Locale/Character set and Language options are set correctly
-- In the looks settings check `Blinking` and whatever cursor style you prefer
-- In the font settings choose a NERD Font (https://github.com/ryanoasis/nerd-fonts)
-- In the font settings check `Show bold as font`, `Show bold as color` and `Allow blinking`
-- In the window settings set `Scrollbar` to `None` since that wont work really well using tmux anyways
-- In the terminal settings set `Type` to `xterm-256color`
-- To install a colorscheme download a `<colorscheme>.minttyrc` file and put it in `%appdata%\wsltty\themes`
-
-# Cross platform copy-pasting
-
-For cross platform copy-paste support I use Lemonade: https://github.com/pocke/lemonade
-- The install script installs the Linux client
-- Download the Windows application from https://github.com/pocke/lemonade/releases
-- Unzip the Windows version and put the `lemonade.exe` in a convenient directory
-- To run the server open a command prompt and run `lemonade.exe server`
-- To send something to the clipboard from Linux run `lemonade copy "YourClipboardText"` or `OutputToPipe | lemonade copy`
-
-Running the server in the background without showing the terminal window:
-- Create a file `lemonade.vbs` in a convenient location and put in the following
-   ```
-   Dim WinScriptHost
-   Set WinScriptHost = CreateObject("WScript.Shell")
-   WinScriptHost.Run("C:\Workspace\Tools\Lemonade\lemonade.exe server"), 0, true
-   Set WinScriptHost = Nothing
-   ```
-- To run this automatically on startup create a registry key in `HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Run` with the value `WScript C:\Path\To\lemonade.vbs`
+- Set up an X-Server (VcXsrv) 
+- If using a terminal emulator I would highly recommend https://github.com/mintty/wsltty or alternatively Hyperterm
 
 # Open links on the Windows host
 

@@ -20,8 +20,8 @@ nnoremap <leader>r :source $MYVIMRC<CR>
 tnoremap <Esc> <C-\><C-n>:q<CR> 
 
 " upper or lowercase the current word
-nnoremap <leader><Up> gUiW
-nnoremap <leader><Down> guiW
+nnoremap <leader>lc gUiW
+nnoremap <leader>uc guiW
 
 " Splits
 nnoremap \	  <C-W>v<C-W><Right>
@@ -45,11 +45,11 @@ nnoremap <C-LEFT>    <C-W><<CR>
 nnoremap <C-RIGHT>  <C-W>><CR>
 
 " Tabs
-nnoremap <S-L> :tabn<CR>
-nnoremap <S-H> :tabp<CR>
-nnoremap <S-J> :tabc<CR>
-nnoremap <S-K> :tabnew<CR>
-nnoremap <S-O> :tabo<CR>
+nnoremap <leader><Right> :tabn<CR>
+nnoremap <leader><Left> :tabp<CR>
+nnoremap <leader><Down> :tabc<CR>
+nnoremap <leader><Up> :tabnew<CR>
+nnoremap <Leader><leader><Down> :tabo<CR>
 
 " Alchemist: Go to definition in new split and rebind go to Doc
 nnoremap <leader>] :split <bar> ExDef<CR>
@@ -57,6 +57,7 @@ nnoremap <leader>[ :ExDoc<CR>
 
 " Alchemist: Save file, Compile and open IEx
 nnoremap <leader>es :w<CR>:Mix<Space>compile<CR>:IEx<CR><CR>
+
 nnoremap <leader>eb :w<CR>:Mix<Space>compile<CR><CR>
 
 " Omni complete

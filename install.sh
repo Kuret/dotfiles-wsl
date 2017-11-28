@@ -7,13 +7,6 @@ fi
 # Create temp directory
 mkdir -p ~/temp
 
-# Windows <-> Linux clipboard support
-if ! type -a lemonade &> /dev/null; then
-   wget -P ~/temp/ -q https://github.com/pocke/lemonade/releases/download/v1.1.1/lemonade_linux_amd64.tar.gz
-   tar xzf ~/temp/lemonade_linux_amd64.tar.gz -C ~/temp/
-   sudo cp ~/temp/lemonade /usr/local/bin
-fi
-
 # Repos
 sudo add-apt-repository ppa:neovim-ppa/stable -y
 sudo add-apt-repository ppa:aguignard/ppa -y

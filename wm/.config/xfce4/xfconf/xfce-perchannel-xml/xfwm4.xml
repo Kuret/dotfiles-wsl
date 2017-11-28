@@ -8,7 +8,7 @@
       <value type="string" value="3"/>
       <value type="string" value="4"/>
     </property>
-    <property name="workspace_count" type="int" value="1"/>
+    <property name="workspace_count" type="int" value="2"/>
     <property name="title_font" type="string" value="DejaVu Sans 11"/>
     <property name="theme" type="string" value="Windowck"/>
   </property>
