@@ -10,7 +10,6 @@ mkdir -p ~/temp
 # Repos
 sudo add-apt-repository ppa:neovim-ppa/stable -y
 sudo add-apt-repository ppa:aguignard/ppa -y
-sudo add-apt-repository ppa:therealkenc/wsl-pulseaudio -y
 
 curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
 echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
@@ -19,7 +18,6 @@ wget https://packages.erlang-solutions.com/erlang-solutions_1.0_all.deb -O ~/tem
 sudo dpkg -i ~/temp/erlang-solutions_1.0_all.deb
 
 # Precompiled packages
-wget http://ppa.launchpad.net/oiteam/xfce4/ubuntu/pool/main/x/xfce4-windowck-plugin/xfce4-windowck-plugin_0.3.1-0ubuntu1~oiteam0_amd64.deb -O ~/temp/
 wget http://download.opensuse.org/repositories/home:/Horst3180/xUbuntu_16.04/all/arc-theme_1488477732.766ae1a-0_all.deb -O ~/temp/
 
 # Update apt sources
@@ -30,6 +28,13 @@ sudo apt-get -y install aptitude software-properties-common build-essential
 sudo apt-get -y install libncurses5-dev unixodbc-dev cmake autoconf m4 libev-dev libyajl-dev
 sudo apt-get -y install qt5-default libqt5webkit5-dev gstreamer1.0-plugins-base gstreamer1.0-tools gstreamer1.0-x
 
+sudo apt-get -y install neovim python-dev python-pip python3-dev python3-pip
+sudo apt-get -y install inotify-tools imagemagick yarn nginx redis-server
+sudo apt-get -y install postgresql-client-common postgresql-client libpq-dev
+
+# Terminal utilities
+sudo apt-get -y install zsh stow silversearcher-ag ranger w3m rtv
+
 # Stuff for GUI applications
 sudo apt-get -y install libgl1-mesa-dev libglu1-mesa-dev libpng3
 sudo apt-get -y install libfreetype6-dev libfontconfig1-dev libpango1.0-dev
@@ -39,45 +44,20 @@ sudo apt-get -y install libxcb-xinerama0-dev libxcb-xkb-dev libxkbcommon-dev
 sudo apt-get -y install libxkbcommon-x11-dev libxcb-xrm-dev
 sudo apt-get -y install libstartup-notification0-dev
 sudo apt-get -y install x11-xserver-utils xclip libwxgtk3.0-dev libgtk3.0
-sudo apt-get -y install gnome-accessibility-themes gnome-themes-standard gnome-themes-standard-data
+sudo apt-get -y install caca-utils highlight atool poppler-utils mediainfo
 
-sudo apt-get -y install xfce4-settings xfce4-panel compton lxappearance
-sudo apt-get -y install libpulse0=1:8.0-0ubuntu3.3ppa1
-sudo apt-get -y install nitrogen rofi
-
-sudo apt-get -y install ranger caca-utils highlight atool w3m poppler-utils mediainfo
-
-sudo dpkg -i ~/temp/xfce4-windowck-plugin*.deb
+# Window manager stuff
+sudo apt-get -y install i3 lxappearance rofi feh mpv
 sudo dpkg -i ~/temp/arc-theme*.deb
 
-# i3 WM
-mkdir -p ~/git && pushd ~/git
-
-git clone https://www.github.com/Airblader/i3 i3-gaps
-cd i3-gaps
-autoreconf --force --install
-rm -rf build/
-mkdir -p build && cd build/
-../configure --prefix=/usr --sysconfdir=/etc --disable-sanitizers
-make
-sudo make install
-
-popd
-
 # Termite terminal
-mkdir -p ~/temp/termite && pushd ~/temp/termite
+mkdir -p ~/temp/termite
 
+pushd ~/temp/termite
 wget -O - https://raw.githubusercontent.com/Corwind/termite-install/master/termite-install.sh | sh
-
 popd
 
-# Install Tmux, Zsh, Stow, Silver Searcher
-sudo apt-get -y install tmux zsh stow silversearcher-ag
-
-# Neovim
-sudo apt-get -y install neovim
-sudo apt-get -y install python-dev python-pip python3-dev python3-pip
-
+# Neovim python plugin
 pip3 install --upgrade pip
 pip3 install neovim
 
@@ -94,7 +74,7 @@ curl -sL --proto-redir -all,https https://raw.githubusercontent.com/zplug/instal
 chmod -R 755 ~/.zplug
 
 # Restore dotfiles
-stow tmux nvim zsh npm bin
+stow nvim zsh npm bin wm
 
 # Make files in ~/bin executable
 chmod +x ~/bin/*
@@ -108,19 +88,10 @@ nvim --headless +PlugInstall +qall
 # Development stuff #
 # # # # # # # # # # #
 
-# Installs:
-#   Inotify: needed for Phoenix file watching
-#   Imagemagick
-#   Yarn
-#   Nginx, set config dir with -p (example in zsh/funtions)
-#   Redis/
-sudo apt-get -y install inotify-tools imagemagick yarn nginx redis-server
-
 # Postgres
 # Assumes a postgres server is running on the windows side
 # with default credentials (postgres/postgres)
 # Afterwards you should be able to connect using just 'psql'
-sudo apt-get -y install postgresql-client-common postgresql-client libpq-dev
 psql -U postgres -c "CREATE USER $USER WITH SUPERUSER"
 psql -U postgres -c "CREATE DATABASE $USER"
 

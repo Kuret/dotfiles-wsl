@@ -1,11 +1,3 @@
-" Open NERDTree automatically when no files were specified
-autocmd StdinReadPre * let s:std_in=1
-autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
-
-" Open NERDTree automatically when vim starts up on opening a directory
-autocmd StdinReadPre * let s:std_in=1
-autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0] | wincmd p | ene | endif
-
 " The Silver Searcher
 if executable('ag')
   " Use ag over grep
@@ -18,7 +10,20 @@ if executable('ag')
   let g:ctrlp_use_caching = 0
 endif
 
-let test#strategy = "neovim" " Use nvim terminal for tests
+" Use own keymaps for buffergator
+let g:buffergator_suppress_keymaps = 1
+
+" Split policy for buffergator
+let g:buffergator_viewport_split_policy = 'B'
+
+" Test suite
+let test#strategy = "asyncrun" " Use nvim terminal for tests
+
+augroup vimrc
+  autocmd User AsyncRunStart call asyncrun#quickfix_toggle(8, 1)
+augroup END
+
+" Other settings
 let g:DevIconsEnableFoldersOpenClose = 1 " Use folder icons in file tree
 let g:gruvbox_italic = 1 " Use italics in gruvbox theme
 let g:alchemist#elixir_erlang_src = "~/git/elixir" " Custom elixir/erlang docs directory

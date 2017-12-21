@@ -26,10 +26,9 @@ let g:lightline = {
       \   'helloworld': 'Hello, world!'
       \ },
       \ 'component_function': {
-      \   'gitbranch': 'gitbranch#name',
+      \   'gitbranch': 'gitbranch#name'
       \ }
     \ }
 
+let g:gruvbox_contrast_dark = 'hard'
 colorscheme gruvbox
-
-hi Normal guibg=NONE ctermbg=NONE

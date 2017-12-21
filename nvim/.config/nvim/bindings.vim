@@ -10,8 +10,10 @@ nnoremap : ;
 vnoremap ; :
 vnoremap : ;
 
-" press enter for newline without insert
-nnoremap <cr> o<esc>
+" press leader + enter for newline without insert
+nnoremap <leader><cr> o<Esc>
+" Press enter for newline with insert
+nnoremap <cr> o
 
 " reload vim config
 nnoremap <leader>r :source $MYVIMRC<CR>
@@ -19,13 +21,16 @@ nnoremap <leader>r :source $MYVIMRC<CR>
 " ESC quits the terminal
 tnoremap <Esc> <C-\><C-n>:q<CR> 
 
+" Toggle QuickFix
+nnoremap <leader>cc :call asyncrun#quickfix_toggle(8)<CR>
+
 " upper or lowercase the current word
-nnoremap <leader>lc gUiW
-nnoremap <leader>uc guiW
+nnoremap <leader>lc guiW
+nnoremap <leader>uc gUiW
 
 " Splits
-nnoremap \	  <C-W>v<C-W><Right>
-nnoremap -     <C-W>s<C-W><Down>
+nnoremap <silent> <leader>\ :vnew<CR>:Explore<CR>
+nnoremap <silent> <leader>- :new<CR>:Explore<CR>
 
 " Navigation
 nnoremap <C-J> <C-W><C-J>
@@ -33,23 +38,21 @@ nnoremap <C-K> <C-W><C-K>
 nnoremap <C-L> <C-W><C-L>
 nnoremap <BS> <C-W><C-H>
 
-nnoremap <silent> <C-J> :TmuxNavigateDown<cr>
-nnoremap <silent> <C-K> :TmuxNavigateUp<cr>
-nnoremap <silent> <C-L> :TmuxNavigateRight<cr>
-nnoremap <silent> <BS> :TmuxNavigateLeft<cr>
-
 " Resize
-nnoremap <C-UP>    <C-W>+<CR>
-nnoremap <C-DOWN>  <C-W>-<CR>
-nnoremap <C-LEFT>    <C-W><<CR>
-nnoremap <C-RIGHT>  <C-W>><CR>
+nnoremap <C-UP>    <C-W>+
+nnoremap <C-DOWN>  <C-W>-
+nnoremap <C-LEFT>    <C-W><
+nnoremap <C-RIGHT>  <C-W>>
 
 " Tabs
 nnoremap <leader><Right> :tabn<CR>
 nnoremap <leader><Left> :tabp<CR>
 nnoremap <leader><Down> :tabc<CR>
 nnoremap <leader><Up> :tabnew<CR>
-nnoremap <Leader><leader><Down> :tabo<CR>
+nnoremap <leader><leader><Down> :tabo<CR>
+
+" Buffers
+nnoremap <leader>b :BuffergatorToggle<CR>
 
 " Alchemist: Go to definition in new split and rebind go to Doc
 nnoremap <leader>] :split <bar> ExDef<CR>
@@ -65,15 +68,34 @@ inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 inoremap <C-Space> <C-x><C-o>
 inoremap <C-@> <C-Space>
 
+" EasyMotion
+function! s:config_easyfuzzymotion(...) abort
+  return extend(copy({
+  \   'converters': [incsearch#config#fuzzyword#converter()],
+  \   'modules': [incsearch#config#easymotion#module({'overwin': 1})],
+  \   'keymap': {"\<CR>": '<Over>(easymotion)'},
+  \   'is_expr': 0,
+  \   'is_stay': 1
+  \ }), get(a:, 1, {}))
+endfunction
+
+noremap <silent><expr> / incsearch#go(<SID>config_easyfuzzymotion())
+map <leader>f <Plug>(easymotion-bd-f2)
+
+" Snippets complete
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<c-b>"
+let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+
 " Window swap
 let g:windowswap_map_keys = 0 "prevent default bindings
-nnoremap <silent> <C-W> :call WindowSwap#EasyWindowSwap()<CR>
-
-" File tree
-nnoremap <silent> <C-D> :NERDTreeToggle<CR>
+nnoremap <silent> <leader>w :call WindowSwap#EasyWindowSwap()<CR>
 
 " Grep word under cursor
 nnoremap <C-S-F> :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
+
+" Clear highlight
+nnoremap <silent> <leader>nh :noh<CR>
 
 " Manually lint
 nnoremap <silent> <leader>l :Neomake<CR>

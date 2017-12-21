@@ -2,4 +2,4 @@
 source ~/.bashrc
 
 xfconf-query -c xsettings -p /Xft/DPI -s 148
-i3
+dwm

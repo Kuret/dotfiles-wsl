@@ -56,15 +56,7 @@ endif
 set omnifunc=syntaxcomplete#Complete
 set completeopt=longest,menuone
 
-" Allows cursor change in tmux mode
-if exists('$TMUX')
-    let &t_SI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=1\x7\<Esc>\\"
-    let &t_EI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=0\x7\<Esc>\\"
-else
-    let &t_SI = "\<Esc>]50;CursorShape=1\x7"
-    let &t_EI = "\<Esc>]50;CursorShape=0\x7"
-endif
-
+source $HOME/.config/nvim/plugins/session.vim
 source $HOME/.config/nvim/plugins.vim " Load plugins
 source $HOME/.config/nvim/bindings.vim " Load bindings
 source $HOME/.config/nvim/theme.vim " Load theme
