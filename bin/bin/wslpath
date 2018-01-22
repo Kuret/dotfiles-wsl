@@ -1,0 +1,12 @@
+#!/bin/bash
+if [[ $1 == "-h" ]]; then
+  echo "usage: wslpath <options> <path>"
+  echo "  options:"
+  echo "    -a | force result to absolute path format"
+  echo "    -u | translate from a Windows path to a WSL path (default)"
+  echo "    -w | translate from a WSL path to a Windows path"
+  echo "    -m | translate from a WSL path to a Windows path, with ‘/’ instead of ‘\\’"
+  exit 1
+fi
+
+/bin/wslpath "$@"

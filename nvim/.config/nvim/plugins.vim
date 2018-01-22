@@ -15,9 +15,11 @@ Plug 'sheerun/vim-polyglot'
 " Elixir + Phoenix
 Plug 'slashmili/alchemist.vim'
 Plug 'avdgaag/vim-phoenix'
+Plug 'mhinz/vim-mix-format'
 
 " .NET
-Plug 'OmniSharp/omnisharp-vim'
+" Plug 'OmniSharp/omnisharp-vim'
+Plug '~/.config/nvim/plugged/omnisharp-vim'
 Plug 'OrangeT/vim-csharp'
 Plug 'heaths/vim-msbuild'
 

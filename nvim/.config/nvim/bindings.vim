@@ -10,10 +10,9 @@ nnoremap : ;
 vnoremap ; :
 vnoremap : ;
 
-" press leader + enter for newline without insert
-nnoremap <leader><cr> o<Esc>
-" Press enter for newline with insert
-nnoremap <cr> o
+" press leader + o for newline without insert
+nnoremap <leader>o o<Esc>
+
 
 " reload vim config
 nnoremap <leader>r :source $MYVIMRC<CR>
@@ -28,6 +27,12 @@ nnoremap <leader>cc :call asyncrun#quickfix_toggle(8)<CR>
 nnoremap <leader>lc guiW
 nnoremap <leader>uc gUiW
 
+" QuickFix navigation
+autocmd FileType qf nnoremap <buffer> <CR> <C-w><CR>:ccl<CR>:resize 20<CR>
+autocmd FileType qf nnoremap <buffer> <leader><CR> <C-w><CR><C-W>L<CR>:ccl<CR>
+nnoremap <leader>qfo :copen<CR>
+nnoremap <leader>qfc :ccl<CR>
+
 " Splits
 nnoremap <silent> <leader>\ :vnew<CR>:Explore<CR>
 nnoremap <silent> <leader>- :new<CR>:Explore<CR>
@@ -36,6 +41,8 @@ nnoremap <silent> <leader>- :new<CR>:Explore<CR>
 nnoremap <C-J> <C-W><C-J>
 nnoremap <C-K> <C-W><C-K>
 nnoremap <C-L> <C-W><C-L>
+nnoremap <C-H> <C-W><C-H>
+" For shitty terminals
 nnoremap <BS> <C-W><C-H>
 
 " Resize
@@ -55,13 +62,15 @@ nnoremap <leader><leader><Down> :tabo<CR>
 nnoremap <leader>b :BuffergatorToggle<CR>
 
 " Alchemist: Go to definition in new split and rebind go to Doc
-nnoremap <leader>] :split <bar> ExDef<CR>
-nnoremap <leader>[ :ExDoc<CR>
+autocmd FileType ex,exs nnoremap <buffer> <leader>] :split <bar> ExDef<CR>
+autocmd FileType ex,exs nnoremap <buffer> <leader>[ :ExDoc<CR>
 
 " Alchemist: Save file, Compile and open IEx
 nnoremap <leader>es :w<CR>:Mix<Space>compile<CR>:IEx<CR><CR>
-
 nnoremap <leader>eb :w<CR>:Mix<Space>compile<CR><CR>
+
+" OmniSharp: Remove ^M control chars from file
+autocmd FileType cs 1,$s///ge
 
 " Omni complete
 inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"

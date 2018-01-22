@@ -16,9 +16,16 @@ let g:buffergator_suppress_keymaps = 1
 " Split policy for buffergator
 let g:buffergator_viewport_split_policy = 'B'
 
-" Test suite
-let test#strategy = "asyncrun" " Use nvim terminal for tests
+" Run mix format on save
+let g:mix_format_silent_errors = 1
+let g:mix_format_on_save = 1
 
+" Omnisharp
+let g:OmniSharp_server_type = 'roslyn'
+let g:OmniSharp_server_path = '/mnt/c/Workspace/Tools/omnisharp-roslyn/OmniSharp.exe'
+
+" Test suite
+let test#strategy = "asyncrun"
 augroup vimrc
   autocmd User AsyncRunStart call asyncrun#quickfix_toggle(8, 1)
 augroup END
@@ -26,4 +33,3 @@ augroup END
 " Other settings
 let g:DevIconsEnableFoldersOpenClose = 1 " Use folder icons in file tree
 let g:gruvbox_italic = 1 " Use italics in gruvbox theme
-let g:alchemist#elixir_erlang_src = "~/git/elixir" " Custom elixir/erlang docs directory
