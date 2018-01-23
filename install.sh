@@ -9,7 +9,6 @@ mkdir -p ~/temp
 
 # Repos
 sudo add-apt-repository ppa:neovim-ppa/stable -y
-sudo add-apt-repository ppa:aguignard/ppa -y
 
 curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
 echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
@@ -17,14 +16,11 @@ echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/source
 wget https://packages.erlang-solutions.com/erlang-solutions_1.0_all.deb -O ~/temp/
 sudo dpkg -i ~/temp/erlang-solutions_1.0_all.deb
 
-# Precompiled packages
-wget http://download.opensuse.org/repositories/home:/Horst3180/xUbuntu_16.04/all/arc-theme_1488477732.766ae1a-0_all.deb -O ~/temp/
-
 # Update apt sources
 sudo apt-get -y update
 
 # Build/dev tools
-sudo apt-get -y install aptitude software-properties-common build-essential
+sudo apt-get -y install software-properties-common build-essential
 sudo apt-get -y install libncurses5-dev unixodbc-dev cmake autoconf m4 libev-dev libyajl-dev
 sudo apt-get -y install qt5-default libqt5webkit5-dev gstreamer1.0-plugins-base gstreamer1.0-tools gstreamer1.0-x
 
@@ -33,29 +29,7 @@ sudo apt-get -y install inotify-tools imagemagick yarn nginx redis-server
 sudo apt-get -y install postgresql-client-common postgresql-client libpq-dev
 
 # Terminal utilities
-sudo apt-get -y install zsh stow silversearcher-ag ranger w3m rtv
-
-# Stuff for GUI applications
-sudo apt-get -y install libgl1-mesa-dev libglu1-mesa-dev libpng3
-sudo apt-get -y install libfreetype6-dev libfontconfig1-dev libpango1.0-dev
-sudo apt-get -y install xcb xcb-proto libxcb1-dev libxcb-keysyms1-dev libxcb-ewmh-dev python-xcbgen
-sudo apt-get -y install libxcb-util0-dev libxcb-icccm4-dev libxcb-randr0-dev libxcb-cursor-dev
-sudo apt-get -y install libxcb-xinerama0-dev libxcb-xkb-dev libxkbcommon-dev
-sudo apt-get -y install libxkbcommon-x11-dev libxcb-xrm-dev
-sudo apt-get -y install libstartup-notification0-dev
-sudo apt-get -y install x11-xserver-utils xclip libwxgtk3.0-dev libgtk3.0
-sudo apt-get -y install caca-utils highlight atool poppler-utils mediainfo
-
-# Window manager stuff
-sudo apt-get -y install i3 lxappearance rofi feh mpv
-sudo dpkg -i ~/temp/arc-theme*.deb
-
-# Termite terminal
-mkdir -p ~/temp/termite
-
-pushd ~/temp/termite
-wget -O - https://raw.githubusercontent.com/Corwind/termite-install/master/termite-install.sh | sh
-popd
+sudo apt-get -y install zsh dvtm stow silversearcher-ag ranger w3m rtv
 
 # Neovim python plugin
 pip3 install --upgrade pip
@@ -74,7 +48,7 @@ curl -sL --proto-redir -all,https https://raw.githubusercontent.com/zplug/instal
 chmod -R 755 ~/.zplug
 
 # Restore dotfiles
-stow nvim zsh npm bin wm
+stow nvim zsh npm bin
 
 # Make files in ~/bin executable
 chmod +x ~/bin/*
@@ -121,8 +95,8 @@ sudo apt-get -y install erlang
 # Elixir
 asdf plugin-add elixir https://github.com/asdf-vm/asdf-elixir.git
 
-asdf install elixir 1.5.1-otp-20
-asdf global elixir 1.5.1-otp-20
+asdf install elixir 1.6.0-otp-20
+asdf global elixir 1.6.0-otp-20
 
 zsh -c "mix local.hex --force"
 zsh -c "mix archive.install https://github.com/phoenixframework/archives/raw/master/phx_new.ez --force"

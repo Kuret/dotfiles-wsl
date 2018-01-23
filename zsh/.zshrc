@@ -27,6 +27,9 @@ bindkey -v
 # Add the HOME bin directory to the PATH
 export PATH="${HOME}/bin:${PATH}"
 
+# Set default shell
+export SHELL=/usr/bin/zsh
+
 # Set default editor
 export VISUAL=nvim
 export EDITOR="$VISUAL"
@@ -43,9 +46,6 @@ export LANGUAGE="en_US.UTF-8"
 
 # Set display
 export DISPLAY=localhost:0
-
-# PulseAudio server
-export PULSE_SERVER=tcp:localhost
 
 # # # # # # #
 #   Asdf    #
