@@ -30,6 +30,9 @@ export PATH="${HOME}/bin:${PATH}"
 # Set default shell
 export SHELL=/usr/bin/zsh
 
+# Term-colors
+#export TERM="tmux-256color-italic"
+
 # Set default editor
 export VISUAL=nvim
 export EDITOR="$VISUAL"

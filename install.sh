@@ -29,7 +29,7 @@ sudo apt-get -y install inotify-tools imagemagick yarn nginx redis-server
 sudo apt-get -y install postgresql-client-common postgresql-client libpq-dev
 
 # Terminal utilities
-sudo apt-get -y install zsh dvtm stow silversearcher-ag ranger w3m rtv
+sudo apt-get -y install zsh tmux dvtm stow silversearcher-ag mc
 
 # Neovim python plugin
 pip3 install --upgrade pip
@@ -48,7 +48,7 @@ curl -sL --proto-redir -all,https https://raw.githubusercontent.com/zplug/instal
 chmod -R 755 ~/.zplug
 
 # Restore dotfiles
-stow nvim zsh npm bin
+stow nvim zsh tmux npm bin
 
 # Make files in ~/bin executable
 chmod +x ~/bin/*

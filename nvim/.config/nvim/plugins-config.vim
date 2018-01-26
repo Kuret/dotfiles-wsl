@@ -30,6 +30,3 @@ augroup vimrc
   autocmd User AsyncRunStart call asyncrun#quickfix_toggle(8, 1)
 augroup END
 
-" Other settings
-let g:DevIconsEnableFoldersOpenClose = 1 " Use folder icons in file tree
-let g:gruvbox_italic = 1 " Use italics in gruvbox theme
