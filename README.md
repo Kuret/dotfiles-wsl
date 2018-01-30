@@ -1,6 +1,6 @@
 # Dotfiles
 
-This repo contains my dotfiles and an install script for Ubuntu on Windows Subsystem for Linux, which will install:
+This repo contains my dotfiles and install scripts (Currently made only for Ubuntu on Windows 10 WSL), which will install:
 - Common build/development packages
 - Tmux
 - Zsh + Zplug
@@ -17,6 +17,11 @@ This repo contains my dotfiles and an install script for Ubuntu on Windows Subsy
 - Ruby gems: Bundler/Foreman/Rails
 - Elixir mix: Hex/Phoenix
 
+The `install-apt-wsl` which is called from the `install` will also configure applications on the Windows side:
+- Chromedriver + `chromedriver` command on WSL linking to the .exe (for acceptance tests started from WSL)
+- OmniSharp (For .NET development in `vim` on WSL)
+- Wsltty + Config + Gruvbox scheme + Shortcut to WSL in Start (Starts tmux with zsh)
+
 # Running the script
 
 The script requires root and will ask for the root password by itself, **don't start the script as root, use your normal user**
@@ -25,15 +30,9 @@ The script requires root and will ask for the root password by itself, **don't s
 cd ~
 git clone git@github.com:Kuret/dotfiles.git
 cd dotfiles
-chmod +x install.sh
-./install.sh
+chmod +x install
+./install
 ```
-
-# Manually
-
-- Install GNU Stow using your package manager
-- Install whatever packages you need
-- Use `stow` to symlink the dotfiles
 
 # Permissions
 
@@ -61,8 +60,7 @@ Activate the WSL in windows:
    
 - Go to the Windows store and install the package `Ubuntu`
 - Run the user setup and set your username and passwords
-- Set up an X-Server (VcXsrv) 
-- If using a terminal emulator I would highly recommend https://github.com/mintty/wsltty or alternatively Hyperterm
+- If using a terminal emulator I would highly recommend https://github.com/mintty/wsltty (installed with the included script)
 
 # Open links on the Windows host
 
