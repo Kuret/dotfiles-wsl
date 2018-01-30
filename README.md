@@ -1,21 +1,22 @@
 # Dotfiles
 
 This repo contains my dotfiles and install scripts (Currently made only for Ubuntu on Windows 10 WSL), which will install:
-- Common build/development packages
-- Tmux
-- Zsh + Zplug
-- Stow (to symlink dotfiles)
-- Silver searcher (ag)
-- Neovim + Plugins
+- NeoVim + Plugins
 - ImageMagick
 - Yarn
 - Nginx
+- Postgresql
+- Zsh + Zplug
+- Tmux
+- Python
 - Redis
-- PostgreSQL (Client only, see below)
-- Erlang/OTP20
-- Asdf version manager with Node/Ruby/Elixir plugins
-- Ruby gems: Bundler/Foreman/Rails
-- Elixir mix: Hex/Phoenix
+- Silver Searcher (ag)
+- Midnight Commander
+- Asdf version manager for Node/Ruby/Elixir
+- NodeJS
+- Ruby
+- Erlang
+- Elixir
 
 The `install-apt-wsl` which is called from the `install` will also configure applications on the Windows side:
 - Chromedriver + `chromedriver` command on WSL linking to the .exe (for acceptance tests started from WSL)
