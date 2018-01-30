@@ -1,8 +1,1 @@
-zsh/.config/zsh/.histfile
-nvim/.config/nvim/.netrwhist
-nvim/.config/nvim/sessions
-nvim/.config/nvim/plugged
-nvim/.config/nvim/undodir
-nginx/.config/nginx/conf/conf.d/*
-nginx/.config/nginx/conf/ssl
-nginx/.config/nginx/logs
+*.pyc

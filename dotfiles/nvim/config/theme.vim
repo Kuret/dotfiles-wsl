@@ -32,4 +32,8 @@ let g:lightline = {
 
 let g:gruvbox_contrast_dark = 'dark'
 let g:gruvbox_italic = 1 " Use italics in gruvbox theme
-colorscheme gruvbox
+
+if filereadable( expand("$HOME/.config/nvim/plugged/gruvbox/colors/gruvbox.vim") )
+    colorscheme gruvbox
+endif
+

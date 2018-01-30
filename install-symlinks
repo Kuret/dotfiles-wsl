@@ -1,0 +1,24 @@
+#!/usr/bin/env bash
+set -e
+
+# Remove old links
+sudo rm -rf ~/.npmrc > /dev/null 2>&1
+sudo rm -rf ~/.tmux.conf > /dev/null 2>&1
+sudo rm -rf ~/.zshrc > /dev/null 2>&1
+sudo rm -rf ~/.config/nvim/init.vim > /dev/null 2>&1
+sudo rm -rf ~/.config/nvim/config > /dev/null 2>&1
+sudo rm -rf ~/.config/nvim/autoload > /dev/null 2>&1
+sudo rm -rf ~/bin/example-bin > /dev/null 2>&1
+
+# Create symlinks
+ln -sf $PWD/dotfiles/npmrc ~/.npmrc
+ln -sf $PWD/dotfiles/tmux.conf ~/.tmux.conf
+ln -sf $PWD/dotfiles/zshrc ~/.zshrc
+
+mkdir -p ~/.config/nvim
+ln -sf $PWD/dotfiles/nvim/init.vim ~/.config/nvim/init.vim
+ln -sf $PWD/dotfiles/nvim/config ~/.config/nvim
+ln -sf $PWD/dotfiles/nvim/autoload ~/.config/nvim
+
+mkdir -p ~/bin
+ln -sf $PWD/dotfiles/bin/example-bin ~/bin/example-bin

@@ -1,0 +1,91 @@
+#!/usr/bin/env bash
+set -e
+
+# Neovim Repo
+sudo add-apt-repository ppa:neovim-ppa/stable -y
+
+# Yarn Repo
+curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
+echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
+
+# Erlang Repo
+TEMP_ERL="$(mktemp)"
+wget -O "$TEMP_ERL" "https://packages.erlang-solutions.com/erlang-solutions_1.0_all.deb"
+sudo dpkg --skip-same-version -i "$TEMP_ERL"
+rm -f "$TEMP_ERL"
+
+# Update apt sources
+sudo apt-get -y update
+
+# Get package list to install
+PKG_ALL=`echo "$a" | sed '/^||ALL||$/,/^||ENDALL||$/!d;//d' packages`
+PKG_APT=`echo "$a" | sed '/^||APT||$/,/^||ENDAPT||$/!d;//d' packages`
+PACKAGES="$PKG_ALL $PKG_APT"
+
+# Install packages
+sudo apt-get -y install $(echo $PACKAGES | tr '\n' ' ')
+
+# Set default shell
+sudo chsh -s /bin/zsh
+
+# Set neovim as default
+sudo update-alternatives --install /usr/bin/vi vi /usr/bin/nvim 60
+echo 0 | sudo update-alternatives --config vi
+sudo update-alternatives --install /usr/bin/vim vim /usr/bin/nvim 60
+echo 0 | sudo update-alternatives --config vim
+sudo update-alternatives --install /usr/bin/editor editor /usr/bin/nvim 60
+echo 0 | sudo update-alternatives --config editor
+
+# WSL Helpers symlinks
+mkdir -p ~/bin
+
+sudo rm -rf ~/bin/chromedriver > /dev/null 2>&1
+ln -sf $PWD/dotfiles/bin/chromedriver ~/bin/chromedriver
+
+sudo rm -rf ~/bin/msbuild > /dev/null 2>&1
+ln -sf $PWD/dotfiles/bin/msbuild ~/bin/msbuild
+
+sudo rm -rf ~/bin/wsl-browser-bridge > /dev/null 2>&1
+ln -sf $PWD/dotfiles/bin/wsl-browser-bridge ~/bin/wsl-browser-bridge
+
+sudo rm -rf ~/bin/wslpath > /dev/null 2>&1
+ln -sf $PWD/dotfiles/bin/wslpath ~/bin/wslpath
+
+# Install stuff on the Windows-side
+pushd /mnt/c
+
+cmd.exe /c "if not exist Workspace\\Tools\\Chromedriver mkdir Workspace\\Tools\\Chromedriver"
+cmd.exe /c "if not exist Workspace\\Tools\\OmniSharp mkdir Workspace\\Tools\\OmniSharp"
+cmd.exe /c "if not exist Workspace\\Tools\\Wsltty\\bin mkdir Workspace\\Tools\\Wsltty\\bin"
+cd /mnt/c/Workspace/Tools
+
+# Chromedriver
+TEMP_NGT="$(mktemp)"
+wget -O "$TEMP_NGT" "https://dist.nuget.org/win-x86-commandline/latest/nuget.exe"
+mv "$TEMP_NGT" /mnt/c/Workspace/Tools/nuget.exe
+cmd.exe /c "nuget.exe install Selenium.WebDriver.ChromeDriver -ExcludeVersion"
+mv Selenium.WebDriver.ChromeDriver/driver/win32/chromedriver.exe Chromedriver/
+
+# OmniSharp
+TEMP_OMN="$(mktemp)"
+wget -O "$TEMP_OMN" "https://github.com/OmniSharp/omnisharp-roslyn/releases/download/v1.28.0/omnisharp.http-win-x64.zip"
+mv "$TEMP_OMN" /mnt/c/Workspace/Tools/omnisharp.zip
+powershell.exe -Command "Expand-Archive -Path omnisharp.zip -DestinationPath OmniSharp -Force"
+
+# Wsltty
+sudo apt install p7zip-full p7zip-rar
+TEMP_WSL="$(mktemp -d)"
+wget -O "$TEMP_WSL/wsltty.exe" "https://github.com/mintty/wsltty/releases/download/1.8.3.2/wsltty-1.8.3.2-install.exe"
+7z e $TEMP_WSL/wsltty.exe -o/mnt/c/Workspace/Tools/Wsltty/bin cygwin1.dll cygwin-console-helper.exe mintty.exe wslbridge.exe wslbridge-backend -y
+
+# Cleanup
+rm -r $TEMP_WSL
+rm nuget.exe
+rm -r Selenium.WebDriver.ChromeDriver
+rm omnisharp.zip
+
+popd
+
+cp dotfiles/wsltty/* /mnt/c/Workspace/Tools/Wsltty -r
+powershell.exe -Command 'robocopy "C:\Workspace\Tools\Wsltty" "$env:APPDATA\Microsoft\Windows\Start Menu\Programs" wsl-terminal.lnk'
+powershell.exe -Command '(New-Object -ComObject shell.application).Namespace("$env:APPDATA\Microsoft\Windows\Start Menu\Programs").parsename("wsl-terminal.lnk").invokeverb("pintostartscreen")'

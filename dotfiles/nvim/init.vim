@@ -65,9 +65,8 @@ autocmd FocusGained,BufEnter,CursorHold,CursorHoldI * if mode() != 'c' | checkti
 autocmd FileChangedShellPost *
   \ echohl WarningMsg | echo "File changed on disk. Buffer reloaded." | echohl None
 
-source $HOME/.config/nvim/plugins/session.vim
-source $HOME/.config/nvim/plugins.vim " Load plugins
-source $HOME/.config/nvim/bindings.vim " Load bindings
-source $HOME/.config/nvim/theme.vim " Load theme
-source $HOME/.config/nvim/plugins-config.vim " Load plugin settings
+source $HOME/.config/nvim/config/plugins.vim " Load plugins
+source $HOME/.config/nvim/config/bindings.vim " Load bindings
+source $HOME/.config/nvim/config/theme.vim " Load theme
+source $HOME/.config/nvim/config/plugins-config.vim " Load plugin settings
 

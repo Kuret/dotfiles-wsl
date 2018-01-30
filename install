@@ -1,0 +1,66 @@
+#!/usr/bin/env bash
+set -e
+
+if [ $(id -u) != 0 ]; then
+   echo "This script requires root permissions"
+   sudo -v
+fi
+
+# OS-Specific
+sudo chmod +x install-apt-wsl
+./install-apt-wsl
+
+# Symlinks
+sudo chmod +x install-symlinks
+./install-symlinks
+
+# Python
+pip3 install --upgrade pip
+pip3 install neovim
+
+# Zplug
+if [ ! -d ~/.zplug ]; then
+  curl -sL --proto-redir -all,https https://raw.githubusercontent.com/zplug/installer/master/installer.zsh| zsh
+  chmod -R 755 ~/.zplug
+fi
+
+# Make files in ~/bin executable
+chmod +x ~/bin/*
+
+# Install Neovim plugins
+nvim --headless +UpdateRemotePlugins +qall
+nvim --headless +PlugInstall +qall
+
+# Postgres
+# Assumes a postgres server is running somewhere
+# with default credentials (postgres/postgres)
+# Afterwards you should be able to connect using just 'psql'
+psql -U postgres -tc "SELECT 1 FROM pg_roles WHERE rolname='$USER'" | grep -q 1 || psql -U postgres -c "CREATE USER $USER WITH SUPERUSER"
+psql -U postgres -tc "SELECT 1 FROM pg_database WHERE datname = '$USER'" | grep -q 1 || psql -U postgres -c "CREATE DATABASE $USER"
+
+# Asdf version manager
+if [ ! -d ~/.asdf ]; then
+  git clone https://github.com/asdf-vm/asdf.git "${HOME}/.asdf" --branch v0.4.1
+else
+  pushd ~/.asdf
+  git fetch && git checkout v0.4.1
+  popd
+fi
+
+source ~/.asdf/asdf.sh
+
+# Node
+asdf plugin-list | grep -q nodejs || asdf plugin-add nodejs https://github.com/asdf-vm/asdf-nodejs.git
+bash ~/.asdf/plugins/nodejs/bin/import-release-team-keyring # Node.js team's PGP keys
+asdf list nodejs | grep -q 8.4.0 || asdf install nodejs 8.4.0
+asdf global nodejs 8.4.0
+
+# Ruby
+asdf plugin-list | grep -q ruby || asdf plugin-add ruby https://github.com/asdf-vm/asdf-ruby.git
+asdf list ruby | grep -q 2.5.0 || asdf install ruby 2.5.0
+asdf global ruby 2.5.0
+
+# Elixir
+asdf plugin-list | grep -q elixir || asdf plugin-add elixir https://github.com/asdf-vm/asdf-elixir.git
+asdf list elixir | grep -q 1.6.1 || asdf install elixir 1.6.1
+asdf global elixir 1.6.1

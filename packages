@@ -1,0 +1,44 @@
+# All Supported Environments
+||ALL||
+cmake
+autoconf
+m4
+erlang
+neovim
+imagemagick
+yarn
+nginx
+postgresql
+zsh
+tmux
+||ENDALL||
+
+
+# APT Specific
+||APT||
+software-properties-common
+build-essential
+libncurses5-dev
+qt5-default
+libqt5webkit5-dev
+python-dev
+python3-dev
+python-pip
+python3-pip
+inotify-tools
+redis-server
+silversearcher-ag
+mc
+||ENDAPT||
+
+
+# MacOS Specific
+||MACOS||
+ncurses
+qt5
+python
+python3
+redis
+the_silver_searcher
+midnight-commander
+||ENDMACOS||

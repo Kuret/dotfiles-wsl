@@ -1,0 +1,17 @@
+# To use common configuration in %APPDATA%\mintty, simply remove this file
+BoldAsFont=yes
+Font=Consolas NF
+AllowBlinking=yes
+BoldAsColour=yes
+Term=xterm-256color
+ThemeFile=gruvbox.minttyrc
+FontSmoothing=full
+Locale=en_US
+Charset=UTF-8
+Language=en_US
+CursorBlinks=yes
+Scrollbar=none
+ScrollMod=off
+Window=full
+AltFnShortcuts=no
+CursorType=line

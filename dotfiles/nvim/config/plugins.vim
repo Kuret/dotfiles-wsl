@@ -1,3 +1,6 @@
+" Non-managed plugins
+source $HOME/.config/nvim/config/session.vim
+
 call plug#begin('~/.config/nvim/plugged')
 " Snippets
 Plug 'SirVer/ultisnips'
