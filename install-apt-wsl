@@ -8,6 +8,13 @@ sudo add-apt-repository ppa:neovim-ppa/stable -y
 curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
 echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
 
+# Keybase
+TEMP_KBS="$(mktemp)"
+wget -O "$TEMP_KBS" "https://prerelease.keybase.io/keybase_amd64.deb"
+sudo dpkg --skip-same-version -i "$TEMP_KBS"
+sudo apt-get -y install -f
+run_keybase > /dev/null 2>&1
+
 # Erlang Repo
 TEMP_ERL="$(mktemp)"
 wget -O "$TEMP_ERL" "https://packages.erlang-solutions.com/erlang-solutions_1.0_all.deb"
