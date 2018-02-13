@@ -120,3 +120,40 @@ nnoremap <silent> <leader>ta :TestSuite<CR>
 " Navigate to last test
 nnoremap <silent> <leader>tv :TestVisit<CR> 
 
+let b:block_begin = '\<\(do$\|fn\>\)'
+let b:block_end = '\<end\>'
+
+if maparg('im','x') == '' && maparg('im','o') == '' && maparg('am','x') == '' && maparg('am','o') == ''
+  onoremap <silent> <buffer> im :<C-U>call <SID>wrap_i('[[','][')<CR>
+  onoremap <silent> <buffer> am :<C-U>call <SID>wrap_a('[[','][')<CR>
+  xnoremap <silent> <buffer> im :<C-U>call <SID>wrap_i('[[','][')<CR>
+  xnoremap <silent> <buffer> am :<C-U>call <SID>wrap_a('[[','][')<CR>
+endif
+
+function! s:wrap_i(back,forward) abort
+  execute 'norm k'.a:forward
+  let line = line('.')
+  execute 'norm '.a:back
+  if line('.') == line - 1
+    return s:wrap_a(a:back,a:forward)
+  endif
+  execute 'norm jV'.a:forward.'k'
+endfunction
+
+function! s:wrap_a(back,forward) abort
+  execute 'norm '.a:forward
+  if line('.') < line('$') && getline(line('.')+1) ==# ''
+    let after = 1
+  endif
+  execute 'norm '.a:back
+  while getline(line('.')-1) =~# '^\s*#' && line('.')
+    -
+  endwhile
+  if exists('after')
+    execute 'norm V'.a:forward.'j'
+  elseif line('.') > 1 && getline(line('.')-1) =~# '^\s*$'
+    execute 'norm kV'.a:forward
+  else
+    execute 'norm V'.a:forward
+  endif
+endfunction

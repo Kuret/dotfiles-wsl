@@ -2,6 +2,11 @@
 source $HOME/.config/nvim/config/session.vim
 
 call plug#begin('~/.config/nvim/plugged')
+" General
+Plug 'tpope/vim-markdown'
+Plug 'tpope/vim-commentary'
+Plug 'vim-scripts/SyntaxRange'
+
 " Snippets
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
