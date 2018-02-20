@@ -107,8 +107,8 @@ zplug load
 #  Alias/Functions  #
 # # # # # # # # # # #
 
-if [ -d ~/.config/zsh/functions ]; then
-  for file in ~/.config/zsh/functions/*.zsh; do
+if [ -d ~/.zsh ]; then
+  for file in ~/.zsh/*.zsh; do
     source $file
   done
 fi
@@ -118,5 +118,5 @@ fi
 #  WSL Fixes	    #
 # # # # # # # # # # #
 
-# CD to user home, because WSL defaults$
+# CD to user home, because WSL defaults to Windows user dir
 cd ~

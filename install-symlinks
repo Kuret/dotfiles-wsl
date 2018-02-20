@@ -5,6 +5,7 @@ set -e
 sudo rm -rf ~/.npmrc > /dev/null 2>&1
 sudo rm -rf ~/.tmux.conf > /dev/null 2>&1
 sudo rm -rf ~/.zshrc > /dev/null 2>&1
+sudo rm -rf ~/.zsh > /dev/null 2>&1
 sudo rm -rf ~/.config/nvim/init.vim > /dev/null 2>&1
 sudo rm -rf ~/.config/nvim/config > /dev/null 2>&1
 sudo rm -rf ~/.config/nvim/autoload > /dev/null 2>&1
@@ -14,6 +15,9 @@ sudo rm -rf ~/bin/example-bin > /dev/null 2>&1
 ln -sf $PWD/dotfiles/npmrc ~/.npmrc
 ln -sf $PWD/dotfiles/tmux.conf ~/.tmux.conf
 ln -sf $PWD/dotfiles/zshrc ~/.zshrc
+
+mkdir -p ~/.zsh
+ln -sf $PWD/dotfiles/zsh/alias.zsh ~/.zsh/alias.zsh
 
 mkdir -p ~/.config/nvim
 ln -sf $PWD/dotfiles/nvim/init.vim ~/.config/nvim/init.vim
