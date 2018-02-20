@@ -7,18 +7,12 @@ HISTSIZE=99999
 SAVEHIST=4000
 setopt autocd extendedglob
 unsetopt BG_NICE
-bindkey -e
+bindkey -v
 
 zstyle :compinstall filename '/home/rick/.zshrc'
 autoload -Uz compinit
 compinit
 
-# # # # # # #
-# Keybinds  #
-# # # # # # #
-
-# Vim bindings
-bindkey -v
 
 # # # # # # #
 #  Exports  #
@@ -27,83 +21,11 @@ bindkey -v
 # Add the HOME bin directory to the PATH
 export PATH="${HOME}/bin:${PATH}"
 
-# Set default shell
-export SHELL=/usr/bin/zsh
-
-# Term-colors
-#export TERM="tmux-256color-italic"
-
 # Set default editor
+alias vi=nvim
+alias vim=nvim
 export VISUAL=nvim
 export EDITOR="$VISUAL"
-
-# Start Postgresql if it isn't started
-$(pgrep postgres > /dev/null 2>&1) || sudo service postgresql start
-
-# Start Keybase if it isn't started
-$(pgrep keybase > /dev/null 2>&1) || run_keybase > /dev/null 2>&1
-
-# Set default browser to Opera on Windows
-export BROWSER="wsl-browser-bridge"
-
-# Fix locale errors
-export LC_ALL="en_US.UTF-8"
-export LANGUAGE="en_US.UTF-8"
-
-# Set display
-export DISPLAY=localhost:0
-
-# # # # # # #
-#   Asdf    #
-# # # # # # #
-
-source ~/.asdf/asdf.sh
-source ~/.asdf/completions/asdf.bash
-
-# Npm -g without sudo
-if [ ! -d ~/.npm-packages ]; then
-  mkdir ${HOME}/.npm-packages
-fi
-
-NPM_PACKAGES="${HOME}/.npm-packages"
-PATH="$NPM_PACKAGES/bin:$PATH"
-
-# Unset manpath so we can inherit from /etc/manpath via the `manpath` command
-unset MANPATH # delete if you already modified MANPATH elsewhere in your config
-export MANPATH="$NPM_PACKAGES/share/man:$(manpath)"
-
-# # # # # # #
-#   Yarn    #
-# # # # # # #
-
-export PATH="$HOME/.yarn/bin:$PATH"
-
-
-# # # # # # #
-#   Zplug   #
-# # # # # # #
-
-# Theme config
-MSYS=" " # Need to pass the MSYS check in shellder theme to override git BG colors
-DEFAULT_USER=`whoami`
-SHELLDER_DIRECTORY_BG=black
-SHELLDER_DIRECTORY_FG=white
-SHELLDER_GIT_DIRTY_BG=yellow
-SHELLDER_GIT_CLEAN_BG=cyan
-
-# Zplug
-source ~/.zplug/init.zsh
-
-zplugs=()
-zplug 'simnalamburt/shellder', as:theme 
-
-# Install plugins if there are plugins that have not been installed
-if ! zplug check --verbose; then
-  echo; zplug install
-fi
-
-# Load plugins
-zplug load
 
 
 # # # # # # # # # # #
@@ -116,10 +38,3 @@ if [ -d ~/.zsh ]; then
   done
 fi
 
-
-# # # # # # # # # # #
-#  WSL Fixes	    #
-# # # # # # # # # # #
-
-# CD to user home, because WSL defaults to Windows user dir
-cd ~

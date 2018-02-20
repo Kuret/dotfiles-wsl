@@ -18,6 +18,9 @@ ln -sf $PWD/dotfiles/zshrc ~/.zshrc
 
 mkdir -p ~/.zsh
 ln -sf $PWD/dotfiles/zsh/alias.zsh ~/.zsh/alias.zsh
+ln -sf $PWD/dotfiles/zsh/dev-setup.zsh ~/.zsh/dev-setup.zsh
+ln -sf $PWD/dotfiles/zsh/plug.zsh ~/.zsh/plug.zsh
+ln -sf $PWD/dotfiles/zsh/wsl.zsh ~/.zsh/wsl.zsh
 
 mkdir -p ~/.config/nvim
 ln -sf $PWD/dotfiles/nvim/init.vim ~/.config/nvim/init.vim
