@@ -38,7 +38,10 @@ export VISUAL=nvim
 export EDITOR="$VISUAL"
 
 # Start Postgresql if it isn't started
-$(pgrep postgres >/dev/null) || sudo service postgresql start
+$(pgrep postgres > /dev/null 2>&1) || sudo service postgresql start
+
+# Start Keybase if it isn't started
+$(pgrep keybase > /dev/null 2>&1) || run_keybase > /dev/null 2>&1
 
 # Set default browser to Opera on Windows
 export BROWSER="wsl-browser-bridge"
