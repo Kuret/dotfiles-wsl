@@ -20,10 +20,6 @@ let g:buffergator_viewport_split_policy = 'B'
 let g:mix_format_silent_errors = 1
 let g:mix_format_on_save = 1
 
-" Omnisharp
-let g:OmniSharp_server_type = 'roslyn'
-let g:OmniSharp_server_path = '/mnt/c/Workspace/Tools/OmniSharp/OmniSharp.exe'
-
 " Test suite
 let test#strategy = "asyncrun"
 augroup vimrc

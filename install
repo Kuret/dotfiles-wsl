@@ -7,8 +7,19 @@ if [ $(id -u) != 0 ]; then
 fi
 
 # OS-Specific
-sudo chmod +x install-apt-wsl
-./install-apt-wsl
+if [ "$(uname)" = "Darwin" ]; then
+  # sudo chmod +x install-mac
+  # ./install-mac
+
+  echo "Script not yet supported on MacOS"
+  exit 0
+elif [ "$(expr substr $(uname -s) 1 5)" = "Linux" ] && [ $(which apt-get) ]; then
+  sudo chmod +x install-apt
+  ./install-apt
+else
+  echo "Script not supported on this OS/Distro"
+  exit 0
+fi
 
 # Symlinks
 sudo chmod +x install-symlinks
