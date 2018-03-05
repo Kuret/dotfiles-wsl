@@ -82,5 +82,5 @@ asdf global ruby 2.5.0 || echo "Failed to set global Ruby version"
 # Elixir
 echo "Installing Elixir"
 asdf plugin-list | grep -q elixir || asdf plugin-add elixir https://github.com/asdf-vm/asdf-elixir.git >/dev/null 2>&1 || echo "Failed to fetch ASDF elixir plugin"
-asdf list elixir | grep -q 1.6.1 || asdf install elixir 1.6.1 >/dev/null 2>&1 || echo "Failed to install Elixir"
-asdf global elixir 1.6.1 || echo "Failed to set global Elixir version"
+asdf list elixir | grep -q 1.6.2 || asdf install elixir 1.6.2 >/dev/null 2>&1 || echo "Failed to install Elixir"
+asdf global elixir 1.6.2 || echo "Failed to set global Elixir version"

@@ -6,6 +6,7 @@ call plug#begin('~/.config/nvim/plugged')
 Plug 'tpope/vim-markdown'
 Plug 'tpope/vim-commentary'
 Plug 'vim-scripts/SyntaxRange'
+Plug 'vim-scripts/ReplaceWithRegister'
 
 " Snippets
 Plug 'SirVer/ultisnips'
@@ -21,12 +22,9 @@ Plug 'powerman/vim-plugin-AnsiEsc'
 Plug 'sheerun/vim-polyglot'
 
 " Elixir + Phoenix
+Plug 'elixir-editors/vim-elixir'
 Plug 'slashmili/alchemist.vim'
-Plug 'avdgaag/vim-phoenix'
 Plug 'mhinz/vim-mix-format'
-
-" .NET
-Plug 'OrangeT/vim-csharp'
 
 " Navigation
 Plug 'easymotion/vim-easymotion'

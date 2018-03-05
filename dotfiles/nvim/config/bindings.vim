@@ -13,6 +13,8 @@ vnoremap : ;
 " press leader + o for newline without insert
 nnoremap <leader>o o<Esc>
 
+" Paste from yank register
+nnoremap <leader>p ""p
 
 " reload vim config
 nnoremap <leader>r :source $MYVIMRC<CR>
@@ -62,15 +64,12 @@ nnoremap <leader><leader><Down> :tabo<CR>
 nnoremap <leader>b :BuffergatorToggle<CR>
 
 " Alchemist: Go to definition in new split and rebind go to Doc
-autocmd FileType ex,exs nnoremap <buffer> <leader>] :split <bar> ExDef<CR>
-autocmd FileType ex,exs nnoremap <buffer> <leader>[ :ExDoc<CR>
+autocmd FileType ex,exs nnoremap <buffer> <leader>edf :split <bar> ExDef<CR>
+autocmd FileType ex,exs nnoremap <buffer> <leader>edc :ExDoc<CR>
 
-" Alchemist: Save file, Compile and open IEx
-nnoremap <leader>es :w<CR>:Mix<Space>compile<CR>:IEx<CR><CR>
-nnoremap <leader>eb :w<CR>:Mix<Space>compile<CR><CR>
-
-" OmniSharp: Remove ^M control chars from file
-autocmd FileType cs 1,$s///ge
+" Alchemist: Open IEx / Mix
+nnoremap <leader>ex :IEx<CR>
+nnoremap <leader>em :Mix<space>
 
 " Omni complete
 inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
