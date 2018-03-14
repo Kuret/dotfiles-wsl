@@ -5,6 +5,7 @@ filetype plugin indent on             " try to recognise filetype and load plugi
 
 " interface
 set background=dark                   " tell vim what the background color looks like
+set fillchars+=vert:│                 " make seperator a full line
 set colorcolumn=80                    " show a column at 80 chars
 set cursorline                        " highlight current line
 set laststatus=2                      " enable airline on open

@@ -10,6 +10,9 @@ if executable('ag')
   let g:ctrlp_use_caching = 0
 endif
 
+" Disable gitgutter by default
+let g:gitgutter_enabled = 0
+
 " Use own keymaps for buffergator
 let g:buffergator_suppress_keymaps = 1
 

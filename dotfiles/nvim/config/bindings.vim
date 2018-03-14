@@ -63,6 +63,9 @@ nnoremap <leader><leader><Down> :tabo<CR>
 " Buffers
 nnoremap <leader>b :BuffergatorToggle<CR>
 
+" Toggle the GitGutter
+nnoremap <leader>git :GitGutterToggle<CR>
+
 " Alchemist: Go to definition in new split and rebind go to Doc
 autocmd FileType ex,exs nnoremap <buffer> <leader>edf :split <bar> ExDef<CR>
 autocmd FileType ex,exs nnoremap <buffer> <leader>edc :ExDoc<CR>

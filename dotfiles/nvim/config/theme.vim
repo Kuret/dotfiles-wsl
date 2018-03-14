@@ -37,3 +37,4 @@ if filereadable( expand("$HOME/.config/nvim/plugged/gruvbox/colors/gruvbox.vim")
     colorscheme gruvbox
 endif
 
+hi EndOfBuffer ctermbg=bg ctermfg=bg guibg=bg guifg=bg
