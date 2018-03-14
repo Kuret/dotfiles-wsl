@@ -27,6 +27,7 @@ python-pip
 python3-pip
 inotify-tools
 redis-server
+nodejs
 silversearcher-ag
 mc
 ||ENDAPT||
@@ -34,6 +35,7 @@ mc
 
 # MacOS Specific
 ||MACOS||
+node
 ncurses
 qt5
 python

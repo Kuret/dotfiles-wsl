@@ -27,8 +27,8 @@ sudo chmod +x install-symlinks
 
 # Python
 echo "Installing Python modules for NeoVim"
-pip3 install --upgrade pip >/dev/null 2>&1 || echo "Failed to upgrade pip"
-pip3 install neovim >/dev/null 2>&1 || echo "Failed to install neovim python plugin"
+sudo pip3 install --upgrade pip >/dev/null 2>&1 || echo "Failed to upgrade pip"
+sudo pip3 install neovim >/dev/null 2>&1 || echo "Failed to install neovim python plugin"
 
 # Zplug
 if [ ! -d ~/.zplug ]; then
@@ -66,21 +66,14 @@ fi
 
 source ~/.asdf/asdf.sh
 
-# Node
-echo "Installing Node"
-asdf plugin-list | grep -q nodejs || asdf plugin-add nodejs https://github.com/asdf-vm/asdf-nodejs.git >/dev/null 2>&1 || echo "Failed to fetch ASDF node plugin"
-bash ~/.asdf/plugins/nodejs/bin/import-release-team-keyring >/dev/null 2>&1 || echo "Failed to add NodeJS GPG keys to keyring"
-asdf list nodejs | grep -q 8.4.0 || asdf install nodejs 8.4.0 >/dev/null 2>&1 || echo "Failed to install NodeJS"
-asdf global nodejs 8.4.0 || echo "Failed to set global NodeJS version"
-
 # Ruby
 echo "Installing Ruby"
-asdf plugin-list | grep -q ruby || asdf plugin-add ruby https://github.com/asdf-vm/asdf-ruby.git >/dev/null 2>&1 || echo "Failed to fetch ASDF ruby plugin"
-asdf list ruby | grep -q 2.5.0 || asdf install ruby 2.5.0 >/dev/null 2>&1 || echo "Failed to install Ruby"
-asdf global ruby 2.5.0 || echo "Failed to set global Ruby version"
+asdf plugin-add ruby https://github.com/asdf-vm/asdf-ruby.git || true
+asdf install ruby 2.5.0 || true
+asdf global ruby 2.5.0
 
 # Elixir
 echo "Installing Elixir"
-asdf plugin-list | grep -q elixir || asdf plugin-add elixir https://github.com/asdf-vm/asdf-elixir.git >/dev/null 2>&1 || echo "Failed to fetch ASDF elixir plugin"
-asdf list elixir | grep -q 1.6.2 || asdf install elixir 1.6.2 >/dev/null 2>&1 || echo "Failed to install Elixir"
-asdf global elixir 1.6.2 || echo "Failed to set global Elixir version"
+asdf plugin-add elixir https://github.com/asdf-vm/asdf-elixir.git || true
+asdf install elixir 1.6.3 || true
+asdf global elixir 1.6.3

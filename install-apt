@@ -7,6 +7,12 @@ else
   WSL=false
 fi
 
+if cat /etc/issue | grep "Debian" >/dev/null 2>&1; then
+  DISTRO="Debian"
+elif cat /etc/issue | grep "Ubuntu" >/dev/null 2>&1; then
+  DISTRO="Ubuntu"
+fi
+
 # Disable sudo prompt
 echo "Disabling prompt for sudo"
 if ! sudo grep -q "%sudo[[:space:]]ALL=(ALL:ALL) NOPASSWD:ALL" /etc/sudoers >/dev/null 2>&1
@@ -14,9 +20,22 @@ then
   echo "%sudo ALL=(ALL:ALL) NOPASSWD:ALL" | sudo tee -a /etc/sudoers >/dev/null 2>&1 || echo "Failed to edit sudoers file"
 fi
 
+# Debian pre-reqs
+if [ "$DISTRO" = "Debian" ]; then
+  sudo apt-get -y install curl man
+  sudo apt-get -y install dirmngr --install-recommends
+fi
+
 # Neovim Repo
-echo "Adding PPA for NeoVim"
-sudo add-apt-repository ppa:neovim-ppa/stable -y >/dev/null 2>&1 || echo "Failed to add NeoVim PPA"
+# Only Ubuntu
+if [ "$DISTRO" = "Ubuntu" ]; then
+  echo "Adding PPA for NeoVim"
+  sudo add-apt-repository ppa:neovim-ppa/stable -y >/dev/null 2>&1 || echo "Failed to add NeoVim PPA"
+fi
+
+# NodeJS Repo
+echo "Adding repo for NodeJS"
+curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash - >/dev/null 2>&1 || echo "Failed to add NodeJS repo"
 
 # Yarn Repo
 echo "Adding repo for Yarn"
@@ -25,18 +44,19 @@ echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/source
 
 # Keybase
 echo "Installing Keybase"
-TEMP_KBS="$(mktemp)"
-wget -O "$TEMP_KBS" "https://prerelease.keybase.io/keybase_amd64.deb" >/dev/null 2>&1 || echo "Failed to download keybase"
-sudo dpkg --skip-same-version -i "$TEMP_KBS" >/dev/null 2>&1 || echo "Failed to install Keybase"
+TEMP_KBS="$(mktemp -d)"
+wget -O "$TEMP_KBS/keybase_amd64.deb" "https://prerelease.keybase.io/keybase_amd64.deb" >/dev/null 2>&1 || echo "Failed to download keybase"
+sudo apt-get -y install "$TEMP_KBS/keybase_amd64.deb" >/dev/null 2>&1 || echo "Failed to install Keybase"
 sudo apt-get -y install -f >/dev/null 2>&1 || echo "Failed to install Keybase deps"
 run_keybase > /dev/null 2>&1 || echo "Failed to start Keybase"
+rm -rf "$TEMP_KBS"
 
 # Erlang Repo
 echo "Installing Erlang"
-TEMP_ERL="$(mktemp)"
-wget -O "$TEMP_ERL" "https://packages.erlang-solutions.com/erlang-solutions_1.0_all.deb" >/dev/null 2>&1 || echo "Failed to download Erlang"
-sudo dpkg --skip-same-version -i "$TEMP_ERL" >/dev/null 2>&1 || echo "Failed to install Erlang"
-rm -f "$TEMP_ERL"
+TEMP_ERL="$(mktemp -d)"
+wget -O "$TEMP_ERL/erlang_all.deb" "https://packages.erlang-solutions.com/erlang-solutions_1.0_all.deb" >/dev/null 2>&1 || echo "Failed to download Erlang"
+sudo apt-get -y install "$TEMP_ERL/erlang_all.deb" >/dev/null 2>&1 || echo "Failed to install Erlang"
+rm -rf "$TEMP_ERL"
 
 # Update apt sources
 echo "Updating apt sources"
@@ -51,27 +71,29 @@ PACKAGES="$PKG_ALL $PKG_APT"
 # Install packages
 echo "Installing packages"
 sudo apt-get -qq -y install $(echo $PACKAGES | tr '\n' ' ') >/dev/null 2>&1 || echo "Failed to install some packages"
+echo "Finished installing packages"
 
 # Start postgres if it was installed
 if service --status-all 2>&1 | grep -Fq 'postgresql'
 then
   echo "Allowing unauthenticated access to psql"
-  echo "host    all             all              0.0.0.0/0                       md5" >> /etc/postgresql/9.5/main/pg_hba.conf
-  echo "host    all             all              ::/0                            md5" >> /etc/postgresql/9.5/main/pg_hba.conf
+  echo "host    all             all              0.0.0.0/0                       md5" | sudo tee -a $(ls /etc/postgresql/*/main/pg_hba.conf) >/dev/null 2>&1
+  echo "host    all             all              ::/0	                         md5" | sudo tee -a $(ls /etc/postgresql/*/main/pg_hba.conf) >/dev/null 2>&1
 
   echo "Starting PostgresQL"
   sudo service postgresql start >/dev/null 2>&1 || echo "Failed to start PostgresQL"
+
+  if [ "$WSL" = false ]; then
+    echo "Enabling the PostgresQL service"
+    sudo service postgresql enable >/dev/null 2>&1 || echo "Failed to enable the PostgresQL service"
+  fi
 fi
 
 if [ "$WSL" = false ]
 then
-  # Only on actual Linux, WSL cant do services
-  echo "Enabling the PostgresQL service"
-  sudo service postgresql enable >/ddev/null 2>&1 || echo "Failed to enable the PostgresQL service"
-
   # Chromedriver
   echo "Installing chromedriver"
-  sudo apt-get -qq -y install chromium-browser chromium-chromdriver >/dev/null 2>&1 || echo "Failed to install chromedriver"
+  sudo apt-get -qq -y install chromium-browser chromium-chromedriver >/dev/null 2>&1 || echo "Failed to install chromedriver"
   sudo ln -s /usr/lib/chromium-browser/chromedriver /usr/bin/chromedriver >/dev/null 2>&1 || echo "Failed to symlink chromium-chromedriver to chrome-chromedriver"
 else
   # WSL Helpers symlinks
@@ -128,7 +150,9 @@ else
   echo "Copying Wsltty dotfiles to Wsltty folder"
   cp dotfiles/wsltty/* /mnt/c/Workspace/Tools/Wsltty -r
 
-  echo "Creating shortcut to Wsltty on Windows Start Menu"
-  powershell.exe -Command 'robocopy "C:\Workspace\Tools\Wsltty" "$env:APPDATA\Microsoft\Windows\Start Menu\Programs" wsl-terminal.lnk' >/dev/null 2>&1 || echo "Failed to copy shortcut"
-  powershell.exe -Command '(New-Object -ComObject shell.application).Namespace("$env:APPDATA\Microsoft\Windows\Start Menu\Programs").parsename("wsl-terminal.lnk").invokeverb("pintostartscreen")' >/dev/null 2>&1 || echo "Failed to pin shortcut to Start Menu"
+  if ( powershell.exe -Command 'Test-Path "$env:APPDATA\Microsoft\Windows\Start Menu\Programs\wsl-terminal.lnk"' | grep "False" >/dev/null 2>&1 ); then
+    echo "Creating shortcut to Wsltty on Windows Start Menu"
+    powershell.exe -Command 'robocopy "C:\Workspace\Tools\Wsltty" "$env:APPDATA\Microsoft\Windows\Start Menu\Programs" wsl-terminal.lnk' >/dev/null 2>&1 || echo "Failed to copy shortcut"
+    powershell.exe -Command '(New-Object -ComObject shell.application).Namespace("$env:APPDATA\Microsoft\Windows\Start Menu\Programs").parsename("wsl-terminal.lnk").invokeverb("pintostartscreen")' >/dev/null 2>&1 || echo "Failed to pin shortcut to Start Menu"
+  fi
 fi
