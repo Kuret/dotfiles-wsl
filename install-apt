@@ -55,6 +55,10 @@ sudo apt-get -qq -y install $(echo $PACKAGES | tr '\n' ' ') >/dev/null 2>&1 || e
 # Start postgres if it was installed
 if service --status-all 2>&1 | grep -Fq 'postgresql'
 then
+  echo "Allowing unauthenticated access to psql"
+  echo "host    all             all              0.0.0.0/0                       md5" >> /etc/postgresql/9.5/main/pg_hba.conf
+  echo "host    all             all              ::/0                            md5" >> /etc/postgresql/9.5/main/pg_hba.conf
+
   echo "Starting PostgresQL"
   sudo service postgresql start >/dev/null 2>&1 || echo "Failed to start PostgresQL"
 fi
