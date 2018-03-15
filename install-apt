@@ -20,6 +20,10 @@ then
   echo "%sudo ALL=(ALL:ALL) NOPASSWD:ALL" | sudo tee -a /etc/sudoers >/dev/null 2>&1 || echo "Failed to edit sudoers file"
 fi
 
+sudo apt-get -qq -y update && sudo apt-get -y upgrade || echo "Failed to apt-update/apt-upgrade"
+sudo apt-get -y install cmake autoconf pkg-config m4 software-properties-common build-essential libncurses5-dev >/dev/null 2>&1
+sudo apt-get -y install qt5-default libqt5webkit5-dev python-dev python3-dev python-pip python3-pip >/dev/null 2>&1
+
 # Debian pre-reqs
 if [ "$DISTRO" = "Debian" ]; then
   # Add contrib and non-free sources
@@ -29,17 +33,19 @@ if [ "$DISTRO" = "Debian" ]; then
 
   # Install packages required for this script
   echo "Installing Debian pre-reqs"
-  sudo apt-get -qq -y update && sudo apt-get -y upgrade || echo "Failed to apt-update/apt-upgrade"
   sudo apt-get -y install curl man >/dev/null 2>&1 || echo "Failed to install pre-reqs"
   sudo apt-get -y install dirmngr --install-recommends >/dev/null 2>&1 || echo "Failed to install pre-reqs"
 fi
 
-# Neovim Repo
-# Only Ubuntu
-if [ "$DISTRO" = "Ubuntu" ]; then
-  echo "Adding PPA for NeoVim"
-  sudo add-apt-repository ppa:neovim-ppa/stable -y >/dev/null 2>&1 || echo "Failed to add NeoVim PPA"
-fi
+# Neovim
+echo "Checking out NeoVim"
+mkdir -p ~/git && pushd ~/git >/dev/null 2>&1
+git clone https://github.com/neovim/neovim.git && cd neovim
+
+echo "Building and installing NeoVim"
+make >/dev/null 2>&1 || "Failed to build NeoVim"
+sudo make install >/dev/null 2>&1 || "Failed to install NeoVim"
+popd >/dev/null 2>&1
 
 # NodeJS Repo
 echo "Adding repo for NodeJS"
