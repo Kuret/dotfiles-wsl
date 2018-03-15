@@ -20,6 +20,3 @@ export LANGUAGE="en_US.UTF-8"
 
 # Set display for XServer
 export DISPLAY=localhost:0
-
-# CD to user home, because WSL defaults to Windows user dir
-cd ~

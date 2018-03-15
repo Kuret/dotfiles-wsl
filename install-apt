@@ -22,8 +22,16 @@ fi
 
 # Debian pre-reqs
 if [ "$DISTRO" = "Debian" ]; then
-  sudo apt-get -y install curl man
-  sudo apt-get -y install dirmngr --install-recommends
+  # Add contrib and non-free sources
+  echo "Adding contrib and non-free to debian sources.list"
+  sudo sed -i "/.*contrib.*/b; s/deb .*debian.org.*main.*/& contrib/" /etc/apt/sources.list
+  sudo sed -i "/.*non-free.*/b; s/deb .*debian.org.*main.*/& non-free/" /etc/apt/sources.list
+
+  # Install packages required for this script
+  echo "Installing Debian pre-reqs"
+  sudo apt-get -qq -y update && sudo apt-get -y upgrade || echo "Failed to apt-update/apt-upgrade"
+  sudo apt-get -y install curl man >/dev/null 2>&1 || echo "Failed to install pre-reqs"
+  sudo apt-get -y install dirmngr --install-recommends >/dev/null 2>&1 || echo "Failed to install pre-reqs"
 fi
 
 # Neovim Repo
@@ -79,6 +87,9 @@ then
   echo "Allowing unauthenticated access to psql"
   echo "host    all             all              0.0.0.0/0                       md5" | sudo tee -a $(ls /etc/postgresql/*/main/pg_hba.conf) >/dev/null 2>&1
   echo "host    all             all              ::/0	                         md5" | sudo tee -a $(ls /etc/postgresql/*/main/pg_hba.conf) >/dev/null 2>&1
+
+  sudo sed -i "s/listen_addresses = '.*'/listen_addresses = '\*'/" $(ls /etc/postgresql/*/main/postgresql.conf)
+  sudo sed -i "s/port = .*/port = 5432/" $(ls /etc/postgresql/*/main/postgresql.conf)
 
   echo "Starting PostgresQL"
   sudo service postgresql start >/dev/null 2>&1 || echo "Failed to start PostgresQL"
