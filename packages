@@ -1,10 +1,6 @@
 # All Supported Environments
 ||ALL||
-cmake
-autoconf
-m4
 erlang
-neovim
 imagemagick
 yarn
 nginx
@@ -16,15 +12,6 @@ tmux
 
 # APT Specific
 ||APT||
-software-properties-common
-build-essential
-libncurses5-dev
-qt5-default
-libqt5webkit5-dev
-python-dev
-python3-dev
-python-pip
-python3-pip
 inotify-tools
 redis-server
 nodejs
@@ -35,12 +22,8 @@ mc
 
 # MacOS Specific
 ||MACOS||
-node
-ncurses
-qt5
-python
-python3
 redis
+node
 the_silver_searcher
 midnight-commander
 ||ENDMACOS||
