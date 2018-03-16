@@ -1,8 +1,10 @@
 # Dotfiles
 
-This repo contains my dotfiles and install scripts
-Currently made with Debian/Ubuntu on Windows 10 (WSL) in mind
-Supports native Debian/Ubuntu but is untested
+This repo contains my dotfiles and install scripts.
+
+Currently made with Debian/Ubuntu on Windows 10 (WSL) in mind.
+
+Supports native Debian/Ubuntu but is untested.
 
 Scripts will install:
 - NeoVim + Plugins
