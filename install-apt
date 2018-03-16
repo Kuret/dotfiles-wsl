@@ -21,8 +21,8 @@ then
 fi
 
 sudo apt-get -qq -y update && sudo apt-get -y upgrade || echo "Failed to apt-update/apt-upgrade"
-sudo apt-get -y install cmake autoconf pkg-config m4 software-properties-common build-essential libncurses5-dev >/dev/null 2>&1
-sudo apt-get -y install qt5-default libqt5webkit5-dev python-dev python3-dev python-pip python3-pip >/dev/null 2>&1
+sudo apt-get -y install cmake autoconf libtool libtool-bin pkg-config m4 software-properties-common libncurses5-dev >/dev/null 2>&1
+sudo apt-get -y install build-essential qt5-default libqt5webkit5-dev python-dev python3-dev python-pip python3-pip >/dev/null 2>&1
 
 # Debian pre-reqs
 if [ "$DISTRO" = "Debian" ]; then
