@@ -72,6 +72,12 @@ wget -O "$TEMP_ERL/erlang_all.deb" "https://packages.erlang-solutions.com/erlang
 sudo apt-get -y install "$TEMP_ERL/erlang_all.deb" >/dev/null 2>&1 || echo "Failed to install Erlang"
 rm -rf "$TEMP_ERL"
 
+echo "Installing RipGrep"
+TEMP_RG="$(mktemp -d)"
+wget -O "$TEMP_RG/ripgrep.deb" "https://github.com/BurntSushi/ripgrep/releases/download/0.8.1/ripgrep_0.8.1_amd64.deb" >/dev/null 2>&1 || echo "Failed to download RipGrep"
+sudo apt-get -y install "$TEMP_RG/ripgrep.deb" >/dev/null 2>&1 || echo "Failed to install RipGrep"
+rm -rf "$TEMP_RG"
+
 # Update apt sources
 echo "Updating apt sources"
 sudo apt-get -qq -y update
@@ -137,21 +143,33 @@ else
   echo "Installing Windows programs"
   pushd /mnt/c >/dev/null 2>&1
 
-  cmd.exe /c "if not exist Workspace\\Tools\\Chromedriver mkdir Workspace\\Tools\\Chromedriver" >/dev/null 2>&1 || echo "Failed to creare dir for Chromedriver"
+  cmd.exe /c "if not exist Workspace\\Tools\\Chromedriver mkdir Workspace\\Tools\\Chromedriver" >/dev/null 2>&1 || echo "Failed to create dir for Chromedriver"
   cmd.exe /c "if not exist Workspace\\Tools\\Wsltty\\bin mkdir Workspace\\Tools\\Wsltty\\bin" >/dev/null 2>&1 || echo "Failed to create dir for Wsltty"
   cd /mnt/c/Workspace/Tools
+
+  # Pre-reqs
+  sudo apt-get -y install p7zip-full p7zip-rar >/dev/null 2>&1 || echo "Failed to download 7z for extracting Windows tools"
+
+  # Yank from Windows to NeoVim WSL
+  echo "Downloading win32yank (for pasting from Windows clipboard to NeoVim WSL)"
+  TEMP_WY="$(mktemp -d)"
+  wget -O "$TEMP_WY/win32yank.zip" "https://github.com/equalsraf/win32yank/releases/download/v0.0.4/win32yank-x64.zip" >/dev/null 2>&1 || echo "Failed to download win32yank"
+  7z e $TEMP_WY/win32yank.zip -o/mnt/c/Workspace/Tools win32yank.exe -y >/dev/null 2>&1 || echo "Failed to extract win32yank"
+  
+  # Symlink win32yank
+  sudo rm -rf /usr/bin/win32yank
+  sudo ln -s /mnt/c/Workspace/Tools/win32yank.exe /usr/bin/win32yank
 
   # Chromedriver
   echo "Downloading Chromedriver"
   TEMP_NGT="$(mktemp)"
   wget -O "$TEMP_NGT" "https://dist.nuget.org/win-x86-commandline/latest/nuget.exe" >/dev/null 2>&1 || echo "Failed to download nuget.exe"
-  mv "$TEMP_NGT" /mnt/c/Workspace/Tools/nuget.exe || echo "Failed to move buget.exe to Tools folder"
+  mv "$TEMP_NGT" /mnt/c/Workspace/Tools/nuget.exe || echo "Failed to move nuget.exe to Tools folder"
   cmd.exe /c "nuget.exe install Selenium.WebDriver.ChromeDriver -ExcludeVersion" >/dev/null 2>&1 || echo "Failed to download chromedriver from nuget"
   mv Selenium.WebDriver.ChromeDriver/driver/win32/chromedriver.exe Chromedriver/ || echo "Failed to move Chromedriver to Tools folder"
 
   # Wsltty
   echo "Installing Wsltty"
-  sudo apt-get -y install p7zip-full p7zip-rar >/dev/null 2>&1 || echo "Failed to download 7z for extracting wsltty"
   TEMP_WSL="$(mktemp -d)"
   wget -O "$TEMP_WSL/wsltty.exe" "https://github.com/mintty/wsltty/releases/download/1.8.3.2/wsltty-1.8.3.2-install.exe" >/dev/null 2>&1 || echo "Failed to download Wsltty"
   7z e $TEMP_WSL/wsltty.exe -o/mnt/c/Workspace/Tools/Wsltty/bin cygwin1.dll cygwin-console-helper.exe mintty.exe wslbridge.exe wslbridge-backend -y >/dev/null 2>&1 || echo "Failed to extract Wsltty"
@@ -159,6 +177,7 @@ else
   # Cleanup
   echo "Cleaning up"
   rm -r $TEMP_WSL
+  rm -r $TEMP_WY
   rm nuget.exe
   rm -r Selenium.WebDriver.ChromeDriver
 
