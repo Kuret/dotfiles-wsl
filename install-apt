@@ -39,9 +39,10 @@ if [ "$DISTRO" = "Debian" ]; then
 fi
 
 # Neovim
-echo "Checking out NeoVim"
+echo "Checking out / Updating NeoVim"
 mkdir -p ~/git && pushd ~/git >/dev/null 2>&1
-git clone https://github.com/neovim/neovim.git && cd neovim
+git clone https://github.com/neovim/neovim.git >/dev/null 2>&1 || true
+cd neovim && git pull --rebase
 
 echo "Building and installing NeoVim"
 make >/dev/null 2>&1 || "Failed to build NeoVim"
