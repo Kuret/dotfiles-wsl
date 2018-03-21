@@ -20,22 +20,32 @@ alias zshe="pushd ~/.zsh && nvim && popd"
 alias zshc="pushd ~ && nvim ~/.zshrc && popd"
 alias nvime="pushd ~/.config/nvim && nvim && popd"
 
+alias mux="tmuxinator"
+alias mx="tmuxinator start"
+alias mxe="tmuxinator new"
+alias mxs="tmuxinator stop"
+
+alias mxd="tmuxinator start detroit"
+
 # # # # # # # # # # # #
 #  Function aliases   #
 # # # # # # # # # # # #
 
+# git rebase <branch name>
 function gr() {
  if [ "$1" = "" ]; then echo "Missing branch name"
  else git fetch -p && git rebase origin/$1
  fi
 }
 
+# git commit with unqouted message
 function gc() {
  if [ "$1" = "" ]; then echo "No message"
  else git commit -m "$*"
  fi
 }
 
+# git commit with unquoted message + push afterwards
 function gcp() {
  if [ "$1" = "" ]; then echo "No message"
  else git commit -m "$*" && git push
