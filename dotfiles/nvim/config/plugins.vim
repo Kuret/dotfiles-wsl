@@ -34,6 +34,7 @@ Plug 'haya14busa/incsearch-easymotion.vim'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'jeetsukumaran/vim-buffergator'
 Plug 'wesQ3/vim-windowswap'
+Plug 'spolu/dwm.vim'
 
 " Theming
 Plug 'morhetz/gruvbox'
