@@ -20,6 +20,7 @@ let g:buffergator_suppress_keymaps = 1
 let g:buffergator_viewport_split_policy = 'B'
 
 " Run mix format on save
+let g:mix_format_options = '--check-equivalent'
 let g:mix_format_silent_errors = 1
 let g:mix_format_on_save = 1
 

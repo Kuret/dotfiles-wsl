@@ -1,2 +1,0 @@
-#!/bin/sh
-/mnt/c/Workspace/Tools/Chromedriver/chromedriver.exe "$@"
