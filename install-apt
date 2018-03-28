@@ -95,27 +95,23 @@ echo "Installing packages"
 sudo apt-get -qq -y install $(echo $PACKAGES | tr '\n' ' ') >/dev/null 2>&1 || echo "Failed to install some packages"
 echo "Finished installing packages"
 
-# Start postgres if it was installed
-if service --status-all 2>&1 | grep -Fq 'postgresql'
-then
-  echo "Allowing unauthenticated access to psql"
-  echo "host    all             all              0.0.0.0/0                       md5" | sudo tee -a $(ls /etc/postgresql/*/main/pg_hba.conf) >/dev/null 2>&1
-  echo "host    all             all              ::/0	                         md5" | sudo tee -a $(ls /etc/postgresql/*/main/pg_hba.conf) >/dev/null 2>&1
-
-  sudo sed -i "s/listen_addresses = '.*'/listen_addresses = '\*'/" $(ls /etc/postgresql/*/main/postgresql.conf)
-  sudo sed -i "s/port = .*/port = 5432/" $(ls /etc/postgresql/*/main/postgresql.conf)
-
-  echo "Starting PostgresQL"
-  sudo service postgresql start >/dev/null 2>&1 || echo "Failed to start PostgresQL"
-
-  if [ "$WSL" = false ]; then
-    echo "Enabling the PostgresQL service"
-    sudo service postgresql enable >/dev/null 2>&1 || echo "Failed to enable the PostgresQL service"
-  fi
-fi
-
 if [ "$WSL" = false ]
 then
+  # Start postgres if it was installed
+  if service --status-all 2>&1 | grep -Fq 'postgresql'
+  then
+    echo "Allowing unauthenticated access to psql"
+    echo "host    all             all              0.0.0.0/0                       md5" | sudo tee -a $(ls /etc/postgresql/*/main/pg_hba.conf) >/dev/null 2>&1
+    echo "host    all             all              ::/0	                         md5" | sudo tee -a $(ls /etc/postgresql/*/main/pg_hba.conf) >/dev/null 2>&1
+
+    sudo sed -i "s/listen_addresses = '.*'/listen_addresses = '\*'/" $(ls /etc/postgresql/*/main/postgresql.conf)
+    sudo sed -i "s/port = .*/port = 5432/" $(ls /etc/postgresql/*/main/postgresql.conf)
+
+    echo "Starting and Enabling the PostgresQL service"
+    sudo service postgresql start >/dev/null 2>&1 || echo "Failed to start PostgresQL"
+    sudo service postgresql enable >/dev/null 2>&1 || echo "Failed to enable the PostgresQL service"
+  fi
+
   # Chromedriver
   echo "Installing chromedriver"
   sudo apt-get -qq -y install chromium-browser chromium-chromedriver >/dev/null 2>&1 || echo "Failed to install chromedriver"
@@ -124,14 +120,6 @@ else
   # WSL Helpers symlinks
   echo "Symlinking WSL specific files"
   mkdir -p ~/bin
-
-  echo "Linking Chromedriver"
-  sudo rm -rf ~/bin/chromedriver > /dev/null 2>&1
-  ln -sf $PWD/dotfiles/bin/chromedriver ~/bin/chromedriver
-
-  echo "Linking MSBuild"
-  sudo rm -rf ~/bin/msbuild > /dev/null 2>&1
-  ln -sf $PWD/dotfiles/bin/msbuild ~/bin/msbuild
 
   echo "Linking wsl-browser-bridge"
   sudo rm -rf ~/bin/wsl-browser-bridge > /dev/null 2>&1
@@ -145,7 +133,6 @@ else
   echo "Installing Windows programs"
   pushd /mnt/c >/dev/null 2>&1
 
-  cmd.exe /c "if not exist Workspace\\Tools\\Chromedriver mkdir Workspace\\Tools\\Chromedriver" >/dev/null 2>&1 || echo "Failed to create dir for Chromedriver"
   cmd.exe /c "if not exist Workspace\\Tools\\Wsltty\\bin mkdir Workspace\\Tools\\Wsltty\\bin" >/dev/null 2>&1 || echo "Failed to create dir for Wsltty"
   cd /mnt/c/Workspace/Tools
 
@@ -157,31 +144,18 @@ else
   TEMP_WY="$(mktemp -d)"
   wget -O "$TEMP_WY/win32yank.zip" "https://github.com/equalsraf/win32yank/releases/download/v0.0.4/win32yank-x64.zip" >/dev/null 2>&1 || echo "Failed to download win32yank"
   7z e $TEMP_WY/win32yank.zip -o/mnt/c/Workspace/Tools win32yank.exe -y >/dev/null 2>&1 || echo "Failed to extract win32yank"
+  rm -r $TEMP_WY
   
   # Symlink win32yank
-  sudo rm -rf /usr/bin/win32yank
+  sudo rm -rf /usr/bin/win32yank >/dev/null 2>&1
   sudo ln -s /mnt/c/Workspace/Tools/win32yank.exe /usr/bin/win32yank
-
-  # Chromedriver
-  echo "Downloading Chromedriver"
-  TEMP_NGT="$(mktemp)"
-  wget -O "$TEMP_NGT" "https://dist.nuget.org/win-x86-commandline/latest/nuget.exe" >/dev/null 2>&1 || echo "Failed to download nuget.exe"
-  mv "$TEMP_NGT" /mnt/c/Workspace/Tools/nuget.exe || echo "Failed to move nuget.exe to Tools folder"
-  cmd.exe /c "nuget.exe install Selenium.WebDriver.ChromeDriver -ExcludeVersion" >/dev/null 2>&1 || echo "Failed to download chromedriver from nuget"
-  mv Selenium.WebDriver.ChromeDriver/driver/win32/chromedriver.exe Chromedriver/ || echo "Failed to move Chromedriver to Tools folder"
 
   # Wsltty
   echo "Installing Wsltty"
   TEMP_WSL="$(mktemp -d)"
   wget -O "$TEMP_WSL/wsltty.exe" "https://github.com/mintty/wsltty/releases/download/1.8.3.2/wsltty-1.8.3.2-install.exe" >/dev/null 2>&1 || echo "Failed to download Wsltty"
   7z e $TEMP_WSL/wsltty.exe -o/mnt/c/Workspace/Tools/Wsltty/bin cygwin1.dll cygwin-console-helper.exe mintty.exe wslbridge.exe wslbridge-backend -y >/dev/null 2>&1 || echo "Failed to extract Wsltty"
-
-  # Cleanup
-  echo "Cleaning up"
   rm -r $TEMP_WSL
-  rm -r $TEMP_WY
-  rm nuget.exe
-  rm -r Selenium.WebDriver.ChromeDriver
 
   popd >/dev/null 2>&1
 
