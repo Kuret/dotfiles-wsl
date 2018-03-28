@@ -50,10 +50,25 @@ chmod +x install
 
 Activate the WSL in windows:
 - Make sure you are running a Windows 10 build with Windows Store support for WSL (build 16215+)
-- Open powershell as administrator and run command
+- Open powershell as administrator and run commands
 
-   `Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Windows-Subsystem-Linux`
-   
+   ```
+   Set-ExecutionPolicy RemoteSigned -scope CurrentUser
+   iex (new-object net.webclient).downloadstring('https://get.scoop.sh')
+
+   scoop install postgresql
+   scoop install chromedriver # if you need it for acceptance tests
+
+   # obviously dont just create passwordless superusers in a production environment
+   createuser -s postgres
+   createuser -s <your_linux_username>
+ 
+   # start postgresql
+   pg_ctl start
+
+   Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Windows-Subsystem-Linux
+   ```
+
 - Go to the Windows store and install the package `Debian` or `Ubuntu`
 - Run the user setup and set your username and passwords
 - If using a terminal emulator I would highly recommend https://github.com/mintty/wsltty (installed with the included script)

@@ -15,6 +15,7 @@ alias iem="iex -S mix"
 alias db="mix deps.get && yarn && node_modules/brunch/bin/brunch build && mix ecto.migrate"
 alias dms="mix deps.get && yarn && node_modules/brunch/bin/brunch build && mix phx.server"
 alias dup="git checkout master && git pull --rebase && mix deps.get && mix ecto.migrate && yarn && node_modules/brunch/bin/brunch build"
+alias mixg="mix gettext.extract && mix gettext.merge priv/gettext --no-fuzzy"
 
 alias zshe="pushd ~/.zsh && nvim && popd"
 alias zshc="pushd ~ && nvim ~/.zshrc && popd"
